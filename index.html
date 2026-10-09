@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>QC Workbench｜品質管理の計算ツールと問題集</title>
-<meta name="description" content="工程能力・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。">
+<meta name="description" content="工程能力・測定システム解析・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。">
 <meta name="theme-color" content="#1D5C7A">
 <meta property="og:title" content="QC Workbench｜品質管理の計算ツールと問題集">
-<meta property="og:description" content="工程能力・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。">
+<meta property="og:description" content="工程能力・測定システム解析・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kotaooka.github.io/">
 <meta property="og:site_name" content="QC Workbench">
@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://kotaooka.github.io/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="QC Workbench：工程能力解析・抜取検査計算機・公差積み上げ計算・色差累積ビューア・QC2級ドリル・幾何公差ドリル">
+<meta property="og:image:alt" content="QC Workbench：工程能力解析・測定システム解析・抜取検査計算機・公差積み上げ計算・色差累積ビューア・QC2級ドリル・幾何公差ドリル">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://kotaooka.github.io/">
 <!-- ファビコン（外部ファイル不要のインラインSVG） -->
@@ -161,7 +161,7 @@
       <h1>QC Workbench</h1>
       <button class="theme" id="themeBtn" type="button" aria-label="表示テーマを切り替え">表示：自動</button>
     </div>
-    <p class="lead">工程能力・抜取検査・公差積み上げ・色差の計算と、QC検定・幾何公差の学習。</p>
+    <p class="lead">工程能力・測定システム解析・抜取検査・公差積み上げ・色差の計算と、QC検定・幾何公差の学習。</p>
   </header>
 
   <main id="app"></main>
@@ -192,6 +192,14 @@ const tools = [
     std: ["Cp / Cpk / Pp / Ppk", "JIS Z 9020-2"],
     open: "https://kotaooka.github.io/cpk-calc/",
     repo: "https://github.com/kotaooka/cpk-calc"
+  },
+  {
+    section: "calc", fig: "gauge",
+    name: "測定システム解析",
+    desc: "ゲージR&R（ANOVA 法・平均範囲法）で繰り返し性・再現性を分け、%GRR と ndc を判定。偏り・直線性・安定性、Type-1（Cg・Cgk）、計数値の κ・有効性も。",
+    std: ["AIAG MSA 第4版", "%GRR / ndc", "κ"],
+    open: "https://kotaooka.github.io/msa-calc/",
+    repo: "https://github.com/kotaooka/msa-calc"
   },
   {
     section: "calc", fig: "oc",
@@ -257,6 +265,24 @@ const figs = {
       <line x1="8" y1="${base}" x2="124" y2="${base}" stroke="currentColor" stroke-opacity=".4"/>
       <line x1="22" y1="10" x2="22" y2="${base}" stroke="currentColor" stroke-dasharray="3 3" stroke-opacity=".7"/>
       <line x1="112" y1="10" x2="112" y2="${base}" stroke="currentColor" stroke-dasharray="3 3" stroke-opacity=".7"/>`;
+  },
+  // 測定システム解析：%GRR の目盛り（合格・条件付き・不合格の区間）と針
+  gauge() {
+    const cx = 66, cy = 70, R = 52;
+    const pt = (deg, r) => [cx + r * Math.cos(deg * Math.PI / 180), cy - r * Math.sin(deg * Math.PI / 180)];
+    // 180°（左端）〜 0°（右端）を %GRR 0〜50% に対応させる
+    const ang = v => 180 - v / 50 * 180;
+    const arc = (v0, v1, r) => { const a = pt(ang(v0), r), b = pt(ang(v1), r); return `M${a[0].toFixed(1)} ${a[1].toFixed(1)}A${r} ${r} 0 0 1 ${b[0].toFixed(1)} ${b[1].toFixed(1)}`; };
+    let ticks = "";
+    for (let v = 0; v <= 50; v += 5) { const a = pt(ang(v), R - (v % 10 ? 5 : 9)), b = pt(ang(v), R); ticks += `<line x1="${a[0].toFixed(1)}" y1="${a[1].toFixed(1)}" x2="${b[0].toFixed(1)}" y2="${b[1].toFixed(1)}" stroke="currentColor" stroke-width="${v % 10 ? 1 : 1.5}" stroke-opacity="${v % 10 ? .5 : .8}"/>`; }
+    const n = pt(ang(22), R - 14);
+    return `<path d="${arc(0, 50, R)}" fill="none" stroke="currentColor" stroke-opacity=".4"/>
+      <path d="${arc(10, 30, R - 18)}" fill="none" stroke="var(--fig-weak)" stroke-width="10"/>
+      <path d="${arc(0, 10, R - 18)}" fill="none" stroke="currentColor" stroke-width="10" stroke-opacity=".55"/>
+      ${ticks}
+      <line x1="${cx}" y1="${cy}" x2="${n[0].toFixed(1)}" y2="${n[1].toFixed(1)}" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="${cx}" cy="${cy}" r="4.5" fill="var(--panel)" stroke="currentColor" stroke-width="1.8"/>
+      <line x1="8" y1="${cy + 8}" x2="124" y2="${cy + 8}" stroke="currentColor" stroke-opacity=".4"/>`;
   },
   // 抜取検査：2つの方式の OC 曲線
   oc() {

@@ -11,10 +11,11 @@ from PIL import Image, ImageDraw, ImageFont
 REPO = pathlib.Path(__file__).resolve().parent.parent
 FONT_DIR = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "/usr/share/fonts/opentype/noto")
 
-SUBTITLE = ["工程能力・抜取検査・公差積み上げ・色差の計算と、", "QC検定・幾何公差の問題集"]
+SUBTITLE = ["品質管理の計算ツールと、", "QC検定・幾何公差の問題集"]
 TOOLS = [
-    ["工程能力解析", "抜取検査計算機", "公差積み上げ計算"],
-    ["色差累積ビューア", "QC2級ドリル", "幾何公差ドリル"],
+    ["工程能力解析", "測定システム解析", "抜取検査計算機"],
+    ["公差積み上げ計算", "色差累積ビューア"],
+    ["QC2級ドリル", "幾何公差ドリル"],
 ]
 TOP, BOTTOM = (28, 91, 121), (25, 82, 110)
 K = 2  # 縮小前の倍率（アンチエイリアス用）
@@ -40,6 +41,7 @@ def main():
     d.text((70 * K, 152 * K), "QC Workbench", font=font("Bold", 82), fill=(255, 255, 255))
     for i, line in enumerate(SUBTITLE):
         d.text((72 * K, (264 + i * 46) * K), line, font=font("Regular", 28), fill=soft)
+        assert 72 * K + d.textlength(line, font=font("Regular", 28)) < 770 * K, f"副題の行が図に重なる: {line}"
 
     pf = font("Regular", 24)
     y = 402 * K
