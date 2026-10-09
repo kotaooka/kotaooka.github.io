@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>QC Workbench｜品質管理の計算ツールと問題集</title>
+<meta name="description" content="工程能力・抜取検査・公差積み上げの計算ツールと、QC検定2級・幾何公差の問題集。すべて無料・広告なし、ブラウザだけで動きます。">
+<meta name="theme-color" content="#1D5C7A">
+<meta property="og:title" content="QC Workbench｜品質管理の計算ツールと問題集">
+<meta property="og:description" content="工程能力・抜取検査・公差積み上げの計算ツールと、QC検定2級・幾何公差の問題集。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kotaooka.github.io/">
+<meta property="og:site_name" content="QC Workbench">
+<meta property="og:locale" content="ja_JP">
+<!-- SNS共有用の画像。URLは絶対パスで書く（相対パスだと読めないSNSがある） -->
+<meta property="og:image" content="https://kotaooka.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="QC Workbench：工程能力解析・抜取検査計算機・公差積み上げ計算・QC2級ドリル・幾何公差ドリル">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://kotaooka.github.io/">
+<!-- ファビコン（外部ファイル不要のインラインSVG） -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231D5C7A'/%3E%3Cpath d='M6 22c4 0 5-12 10-12s6 12 10 12' fill='none' stroke='%23fff' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+  /* 色はここだけで管理する（ドリル系アプリと同じ #1D5C7A を基調） */
+  :root {
+    --bg: #f5f7f8;
+    --surface: #ffffff;
+    --text: #1b2329;
+    --muted: #5b6770;
+    --line: #dde3e7;
+    --accent: #1D5C7A;
+    --accent-text: #ffffff;
+    --chip-bg: #e6eff3;
+    --chip-text: #1D5C7A;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #11161b;
+      --surface: #182027;
+      --text: #e4e9ec;
+      --muted: #97a3ab;
+      --line: #2a343c;
+      --accent: #4f9fc4;
+      --accent-text: #0d1317;
+      --chip-bg: #1f2d36;
+      --chip-text: #8cc3dc;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", sans-serif;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+  header { padding: 40px 0 8px; }
+  h1 { font-size: 1.6rem; margin: 0 0 6px; letter-spacing: .02em; }
+  .lead { color: var(--muted); margin: 0; font-size: .95rem; }
+  section { margin-top: 32px; }
+  h2 { font-size: 1.05rem; margin: 0 0 4px; }
+  .section-note { color: var(--muted); font-size: .85rem; margin: 0 0 14px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card h3 { font-size: 1.05rem; margin: 0; }
+  .card p { margin: 0; font-size: .9rem; color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
+  .chips li {
+    background: var(--chip-bg);
+    color: var(--chip-text);
+    font-size: .75rem;
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 4px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 40px; padding: 0 14px;
+    border-radius: 8px; font-size: .9rem; font-weight: 600;
+    text-decoration: none; border: 1px solid var(--accent);
+  }
+  .btn.primary { background: var(--accent); color: var(--accent-text); flex: 1 1 auto; }
+  .btn.sub { color: var(--accent); background: transparent; }
+  .btn:focus-visible { outline: 3px solid var(--chip-text); outline-offset: 2px; }
+  footer { margin: 48px 0 32px; color: var(--muted); font-size: .8rem; }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>QC Workbench</h1>
+    <p class="lead">工程能力・抜取検査・公差積み上げの計算と、QC検定・幾何公差の学習。無料・広告なし、ブラウザだけで動きます。</p>
+  </header>
+
+  <main id="app"></main>
+
+  <footer>
+    <a href="https://github.com/kotaooka">GitHub: kotaooka</a>
+    ・「QC検定」は一般財団法人日本規格協会の登録商標です。各問題集は非公式です。
+  </footer>
+</div>
+
+<script>
+// ===== ツール一覧（追加・修正はこの配列だけ編集する） =====
+// section : 表示するグループ（groups のキー）
+// open    : ツール本体のURL
+// repo    : GitHubリポジトリのURL
+// android : Android版の配布ページ（無ければ省略）
+// tags    : 準拠規格・主な手法（短く）
+const groups = {
+  calc:  { title: "計算ツール", note: "入力したデータは端末の中だけで処理され、外部に送信されません。" },
+  drill: { title: "問題集",     note: "計算問題は毎回数値が変わります。間隔反復による復習つき。" }
+};
+
+const tools = [
+  {
+    section: "calc",
+    name: "工程能力解析",
+    desc: "Excel・CSV の測定データから Cp・Cpk・Pp・Ppk、管理図、ヒストグラム、F検定・t検定・相関を計算。必要データ数の見積もりも。",
+    tags: ["Cp / Cpk / Pp / Ppk", "管理図 JIS Z 9020-2", "Ppk 信頼区間"],
+    open: "https://kotaooka.github.io/cpk-calc/",
+    repo: "https://github.com/kotaooka/cpk-calc"
+  },
+  {
+    section: "calc",
+    name: "抜取検査計算機",
+    desc: "ロットの合格確率、AQL方式の n・c、OC曲線の比較、抜取方式の逆設計、不良率の区間推定。",
+    tags: ["AQL表 MIL-STD-105E", "超幾何分布", "Clopper-Pearson"],
+    open: "https://kotaooka.github.io/sampling-calc/",
+    repo: "https://github.com/kotaooka/sampling-calc"
+  },
+  {
+    section: "calc",
+    name: "公差積み上げ計算",
+    desc: "寸法チェーンをブロック図で組み、ワーストケース・RSS・補正RSS・モンテカルロで評価。2次元ベクトルループと幾何公差にも対応。",
+    tags: ["WC / RSS / MC", "感度係数", "位置度 Ⓜ"],
+    open: "https://kotaooka.github.io/stackup-calc/",
+    repo: "https://github.com/kotaooka/stackup-calc"
+  },
+  {
+    section: "drill",
+    name: "QC2級ドリル",
+    desc: "QC検定2級の出題範囲（レベル表164項目）を網羅。本試験形式の大問と模擬試験つき。",
+    tags: ["QC検定2級", "模擬試験", "Web / Android"],
+    open: "https://kotaooka.github.io/qc2-drill/",
+    repo: "https://github.com/kotaooka/qc2-drill",
+    android: "https://github.com/kotaooka/qc2-drill/releases/latest"
+  },
+  {
+    section: "drill",
+    name: "幾何公差ドリル",
+    desc: "記号・データム・位置度・最大実体公差方式を、図面を読む問題で学ぶ。ISO・ASME との違いも。",
+    tags: ["JIS B 0021", "ISO / ASME 比較", "Web / Android"],
+    open: "https://kotaooka.github.io/gdt-drill/",
+    repo: "https://github.com/kotaooka/gdt-drill",
+    android: "https://github.com/kotaooka/gdt-drill/releases/latest"
+  }
+];
+
+// ===== 描画（ここから下は通常いじらない） =====
+// テキストはすべて textContent で入れる（HTMLとして解釈させない）
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text != null) e.textContent = text;
+  return e;
+}
+function link(href, cls, text) {
+  const a = el("a", cls, text);
+  a.href = href;
+  return a;
+}
+
+const app = document.getElementById("app");
+for (const [key, g] of Object.entries(groups)) {
+  const list = tools.filter(t => t.section === key);
+  if (list.length === 0) continue;
+
+  const sec = el("section");
+  sec.append(el("h2", null, g.title));
+  if (g.note) sec.append(el("p", "section-note", g.note));
+
+  const grid = el("div", "grid");
+  for (const t of list) {
+    const card = el("article", "card");
+    card.append(el("h3", null, t.name));
+    card.append(el("p", null, t.desc));
+
+    const chips = el("ul", "chips");
+    for (const tag of t.tags || []) chips.append(el("li", null, tag));
+    card.append(chips);
+
+    const actions = el("div", "actions");
+    actions.append(link(t.open, "btn primary", "開く"));
+    if (t.android) actions.append(link(t.android, "btn sub", "Android"));
+    actions.append(link(t.repo, "btn sub", "GitHub"));
+    card.append(actions);
+
+    grid.append(card);
+  }
+  sec.append(grid);
+  app.append(sec);
+}
+</script>
+</body>
+</html>
