@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>QC Workbench｜品質管理の計算ツールと問題集</title>
-<meta name="description" content="工程能力・測定システム解析・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。">
+<meta name="description" content="工程能力・測定システム解析・2値データの要因解析・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。">
 <meta name="theme-color" content="#1D5C7A">
 <meta property="og:title" content="QC Workbench｜品質管理の計算ツールと問題集">
-<meta property="og:description" content="工程能力・測定システム解析・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。">
+<meta property="og:description" content="工程能力・測定システム解析・2値データの要因解析・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kotaooka.github.io/">
 <meta property="og:site_name" content="QC Workbench">
@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://kotaooka.github.io/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="QC Workbench：工程能力解析・測定システム解析・抜取検査計算機・公差積み上げ計算・色差累積ビューア・QC2級ドリル・幾何公差ドリル">
+<meta property="og:image:alt" content="QC Workbench：工程能力解析・測定システム解析・2値データの要因解析・抜取検査計算機・公差積み上げ計算・色差累積ビューア・QC2級ドリル・幾何公差ドリル">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://kotaooka.github.io/">
 <!-- ファビコン（外部ファイル不要のインラインSVG） -->
@@ -161,7 +161,7 @@
       <h1>QC Workbench</h1>
       <button class="theme" id="themeBtn" type="button" aria-label="表示テーマを切り替え">表示：自動</button>
     </div>
-    <p class="lead">工程能力・測定システム解析・抜取検査・公差積み上げ・色差の計算と、QC検定・幾何公差の学習。</p>
+    <p class="lead">工程能力・測定システム解析・2値データの要因解析・抜取検査・公差積み上げ・色差の計算と、QC検定・幾何公差の学習。</p>
   </header>
 
   <main id="app"></main>
@@ -200,6 +200,14 @@ const tools = [
     std: ["AIAG MSA 第4版", "%GRR / ndc", "κ"],
     open: "https://kotaooka.github.io/msa-calc/",
     repo: "https://github.com/kotaooka/msa-calc"
+  },
+  {
+    section: "calc", fig: "logit",
+    name: "2値データの要因解析",
+    desc: "合否・発生の有無のような2値の結果と測定値の関係をロジスティック回帰で解析。効いている変数、確率の地図、目標の確率になる条件の逆算。",
+    std: ["ロジスティック回帰", "Firth 法", "オッズ比 / AUC"],
+    open: "https://kotaooka.github.io/logit-calc/",
+    repo: "https://github.com/kotaooka/logit-calc"
   },
   {
     section: "calc", fig: "oc",
@@ -283,6 +291,18 @@ const figs = {
       <line x1="${cx}" y1="${cy}" x2="${n[0].toFixed(1)}" y2="${n[1].toFixed(1)}" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
       <circle cx="${cx}" cy="${cy}" r="4.5" fill="var(--panel)" stroke="currentColor" stroke-width="1.8"/>
       <line x1="8" y1="${cy + 8}" x2="124" y2="${cy + 8}" stroke="currentColor" stroke-opacity=".4"/>`;
+  },
+  // 2値データ：0 と 1 に並ぶ観測点と、確率の S 字曲線
+  logit() {
+    const x0 = 10, x1 = 122, top = 14, bot = 74;
+    const curve = [];
+    for (let i = 0; i <= 60; i++) { const u = i / 60; curve.push([x0 + (x1 - x0) * u, bot - (bot - top) / (1 + Math.exp(-(u - 0.55) * 11))]); }
+    const lo = [16, 28, 38, 50, 62, 80], hi = [56, 74, 88, 98, 108, 118];
+    return `<line x1="${x0}" y1="${bot}" x2="${x1}" y2="${bot}" stroke="currentColor" stroke-opacity=".4"/>
+      <line x1="${x0}" y1="${top}" x2="${x1}" y2="${top}" stroke="currentColor" stroke-dasharray="3 3" stroke-opacity=".4"/>
+      <path d="${path(curve)}" fill="none" stroke="currentColor" stroke-width="2"/>
+      ${lo.map(x => `<circle cx="${x}" cy="${bot + 7}" r="2.8" fill="var(--panel)" stroke="currentColor" stroke-width="1.4"/>`).join("")}
+      ${hi.map(x => `<circle cx="${x}" cy="${top - 7}" r="2.8" fill="var(--fig-weak)" stroke="currentColor" stroke-width="1.4"/>`).join("")}`;
   },
   // 抜取検査：2つの方式の OC 曲線
   oc() {

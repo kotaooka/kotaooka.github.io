@@ -6,6 +6,7 @@
 |---|---|---|
 | 工程能力解析 | https://kotaooka.github.io/cpk-calc/ | [cpk-calc](https://github.com/kotaooka/cpk-calc) |
 | 測定システム解析 | https://kotaooka.github.io/msa-calc/ | [msa-calc](https://github.com/kotaooka/msa-calc) |
+| 2値データの要因解析 | https://kotaooka.github.io/logit-calc/ | [logit-calc](https://github.com/kotaooka/logit-calc) |
 | 抜取検査計算機 | https://kotaooka.github.io/sampling-calc/ | [sampling-calc](https://github.com/kotaooka/sampling-calc) |
 | 公差積み上げ計算 | https://kotaooka.github.io/stackup-calc/ | [stackup-calc](https://github.com/kotaooka/stackup-calc) |
 | 色差累積ビューア | https://kotaooka.github.io/deltae-calc/ | [deltae-calc](https://github.com/kotaooka/deltae-calc) |
