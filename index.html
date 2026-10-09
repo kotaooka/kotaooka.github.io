@@ -21,90 +21,146 @@
 <link rel="canonical" href="https://kotaooka.github.io/">
 <!-- ファビコン（外部ファイル不要のインラインSVG） -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231D5C7A'/%3E%3Cpath d='M6 22c4 0 5-12 10-12s6 12 10 12' fill='none' stroke='%23fff' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>
+  // 保存したテーマ（auto / light / dark）を描画前に当てる
+  try { const t = localStorage.getItem("qc-workbench-theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) { /* 保存できない環境 */ }
+</script>
+<!-- 字体は計算ツールと同じ BIZ UDPゴシック（本文）と IBM Plex Mono（規格番号） -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
-  /* 色はここだけで管理する（ドリル系アプリと同じ #1D5C7A を基調） */
+  /* 色はここだけで管理する（og画像・ドリル系アプリと同じ #1D5C7A を基調） */
   :root {
-    --bg: #f5f7f8;
-    --surface: #ffffff;
-    --text: #1b2329;
-    --muted: #5b6770;
-    --line: #dde3e7;
+    --bg: #eef2f4;
+    --panel: #ffffff;
+    --ink: #15232c;
+    --ink2: #44535e;
+    --muted: #6f7d87;
+    --line: #d6dee3;
     --accent: #1D5C7A;
-    --accent-text: #ffffff;
-    --chip-bg: #e6eff3;
-    --chip-text: #1D5C7A;
+    --accent-weak: #e3eef3;
+    --fig: #1D5C7A;
+    --fig-weak: rgba(29, 92, 122, .14);
+    --f-ui: "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
+    --f-num: "IBM Plex Mono", ui-monospace, "Consolas", monospace;
   }
+  /* ダーク：表示が「自動」なら OS の設定に従い、「ダーク」なら常に適用（計算ツールと同じ仕組み） */
   @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #11161b;
-      --surface: #182027;
-      --text: #e4e9ec;
-      --muted: #97a3ab;
-      --line: #2a343c;
-      --accent: #4f9fc4;
-      --accent-text: #0d1317;
-      --chip-bg: #1f2d36;
-      --chip-text: #8cc3dc;
+    :root:not([data-theme="light"]) {
+      --bg: #10171c;
+      --panel: #172129;
+      --ink: #e3eaee;
+      --ink2: #b3c0c8;
+      --muted: #8a99a3;
+      --line: #27333c;
+      --accent: #6fb3d2;
+      --accent-weak: #1c2d37;
+      --fig: #7fbcd8;
+      --fig-weak: rgba(127, 188, 216, .16);
+      color-scheme: dark;
     }
+  }
+  :root[data-theme="dark"] {
+    --bg: #10171c;
+    --panel: #172129;
+    --ink: #e3eaee;
+    --ink2: #b3c0c8;
+    --muted: #8a99a3;
+    --line: #27333c;
+    --accent: #6fb3d2;
+    --accent-weak: #1c2d37;
+    --fig: #7fbcd8;
+    --fig-weak: rgba(127, 188, 216, .16);
+    color-scheme: dark;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     background: var(--bg);
-    color: var(--text);
-    font-family: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", sans-serif;
-    line-height: 1.6;
+    color: var(--ink);
+    font-family: var(--f-ui);
+    line-height: 1.7;
     -webkit-text-size-adjust: 100%;
   }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
-  header { padding: 40px 0 8px; }
-  h1 { font-size: 1.6rem; margin: 0 0 6px; letter-spacing: .02em; }
-  .lead { color: var(--muted); margin: 0; font-size: .95rem; }
-  section { margin-top: 32px; }
-  h2 { font-size: 1.05rem; margin: 0 0 4px; }
-  .section-note { color: var(--muted); font-size: .85rem; margin: 0 0 14px; }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 14px;
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+
+  /* 見出し部 */
+  header { padding: 56px 0 20px; }
+  .head-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .theme {
+    flex: none; margin-top: 4px; min-height: 32px; padding: 0 12px;
+    border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--ink2);
+    font: inherit; font-size: .8rem; font-weight: 700; cursor: pointer;
   }
-  .card {
-    background: var(--surface);
+  .theme:hover { border-color: var(--accent); color: var(--accent); }
+  .theme:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  h1 { font-size: 2.1rem; line-height: 1.2; margin: 0 0 10px; letter-spacing: .01em; }
+  .lead { margin: 0; color: var(--ink2); font-size: 1rem; }
+
+  /* グループ */
+  section { margin-top: 36px; }
+  .group-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin: 0 0 10px; }
+  h2 { font-size: 1.05rem; margin: 0; }
+  .group-note { margin: 0; color: var(--muted); font-size: .82rem; }
+
+  /* ツールの一覧（行がそのままツールへのリンク） */
+  .list {
+    list-style: none; margin: 0; padding: 0;
+    background: var(--panel);
     border: 1px solid var(--line);
     border-radius: 12px;
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    overflow: hidden;
   }
-  .card h3 { font-size: 1.05rem; margin: 0; }
-  .card p { margin: 0; font-size: .9rem; color: var(--muted); }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
-  .chips li {
-    background: var(--chip-bg);
-    color: var(--chip-text);
-    font-size: .75rem;
-    padding: 2px 8px;
-    border-radius: 999px;
-  }
-  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 4px; }
-  .btn {
+  .row { position: relative; display: grid; grid-template-columns: 132px 1fr auto; gap: 20px; align-items: center; padding: 18px 20px; }
+  .row + .row { border-top: 1px solid var(--line); }
+  .row:hover { background: var(--accent-weak); }
+  .row:focus-within { background: var(--accent-weak); }
+  .fig { width: 132px; height: 88px; color: var(--fig); }
+  .fig svg { display: block; width: 100%; height: 100%; overflow: visible; }
+  .body { min-width: 0; }
+  h3 { font-size: 1.12rem; margin: 0 0 2px; }
+  /* 行全体をクリック範囲にする（リンクは見出しの1つだけ） */
+  h3 a { color: inherit; text-decoration: none; }
+  h3 a::after { content: ""; position: absolute; inset: 0; }
+  h3 a:focus-visible { outline: none; }
+  .row:has(h3 a:focus-visible) { outline: 3px solid var(--accent); outline-offset: -3px; }
+  .desc { margin: 0; color: var(--ink2); font-size: .9rem; }
+  .std { margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 0 14px; font-family: var(--f-num); font-size: .76rem; color: var(--muted); letter-spacing: .01em; }
+  .std span { white-space: nowrap; }
+  .sub { display: flex; flex-direction: column; align-items: stretch; gap: 6px; font-size: .82rem; white-space: nowrap; }
+  /* GitHub・Android 版は小さめの枠つきボタン（行のリンクより手前に置く） */
+  .sub a {
+    position: relative; z-index: 1;
     display: inline-flex; align-items: center; justify-content: center;
-    min-height: 40px; padding: 0 14px;
-    border-radius: 8px; font-size: .9rem; font-weight: 600;
-    text-decoration: none; border: 1px solid var(--accent);
+    min-height: 32px; padding: 0 14px;
+    border: 1px solid var(--line); border-radius: 6px;
+    background: var(--panel); color: var(--ink2);
+    font-weight: 700; text-decoration: none;
   }
-  .btn.primary { background: var(--accent); color: var(--accent-text); flex: 1 1 auto; }
-  .btn.sub { color: var(--accent); background: transparent; }
-  .btn:focus-visible { outline: 3px solid var(--chip-text); outline-offset: 2px; }
-  footer { margin: 48px 0 32px; color: var(--muted); font-size: .8rem; }
+  .sub a:hover { border-color: var(--accent); color: var(--accent); }
+  .sub a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  footer { margin: 48px 0 36px; color: var(--muted); font-size: .8rem; }
   footer a { color: inherit; }
+
+  /* スマホ幅：図を小さくし、サブのリンクを本文の下に回す */
+  @media (max-width: 600px) {
+    header { padding-top: 40px; }
+    h1 { font-size: 1.7rem; }
+    .row { grid-template-columns: 84px 1fr; gap: 14px; padding: 16px; align-items: start; }
+    .fig { width: 84px; height: 56px; margin-top: 4px; }
+    .sub { grid-column: 2; flex-direction: row; gap: 8px; }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>QC Workbench</h1>
+    <div class="head-row">
+      <h1>QC Workbench</h1>
+      <button class="theme" id="themeBtn" type="button" aria-label="表示テーマを切り替え">表示：自動</button>
+    </div>
     <p class="lead">工程能力・抜取検査・公差積み上げの計算と、QC検定・幾何公差の学習。</p>
   </header>
 
@@ -118,10 +174,11 @@
 <script>
 // ===== ツール一覧（追加・修正はこの配列だけ編集する） =====
 // section : 表示するグループ（groups のキー）
+// fig     : 行の左に描く図（figs のキー）
 // open    : ツール本体のURL
 // repo    : GitHubリポジトリのURL
 // android : Android版の配布ページ（無ければ省略）
-// tags    : 準拠規格・主な手法（短く）
+// std     : 準拠規格・主な手法（短く）
 const groups = {
   calc:  { title: "計算ツール", note: "入力したデータは端末の中だけで処理され、外部に送信されません。" },
   drill: { title: "問題集",     note: "計算問題は毎回数値が変わります。間隔反復による復習つき。" }
@@ -129,48 +186,132 @@ const groups = {
 
 const tools = [
   {
-    section: "calc",
+    section: "calc", fig: "cap",
     name: "工程能力解析",
     desc: "Excel・CSV の測定データから Cp・Cpk・Pp・Ppk、管理図、ヒストグラム、F検定・t検定・相関を計算。必要データ数の見積もりも。",
-    tags: ["Cp / Cpk / Pp / Ppk", "管理図 JIS Z 9020-2", "Ppk 信頼区間"],
+    std: ["Cp / Cpk / Pp / Ppk", "JIS Z 9020-2"],
     open: "https://kotaooka.github.io/cpk-calc/",
     repo: "https://github.com/kotaooka/cpk-calc"
   },
   {
-    section: "calc",
+    section: "calc", fig: "oc",
     name: "抜取検査計算機",
     desc: "ロットの合格確率、AQL方式の n・c、OC曲線の比較、抜取方式の逆設計、不良率の区間推定。",
-    tags: ["AQL表 MIL-STD-105E", "超幾何分布", "Clopper-Pearson"],
+    std: ["MIL-STD-105E", "超幾何分布", "Clopper-Pearson"],
     open: "https://kotaooka.github.io/sampling-calc/",
     repo: "https://github.com/kotaooka/sampling-calc"
   },
   {
-    section: "calc",
+    section: "calc", fig: "stack",
     name: "公差積み上げ計算",
     desc: "寸法チェーンをブロック図で組み、ワーストケース・RSS・補正RSS・モンテカルロで評価。2次元ベクトルループと幾何公差にも対応。",
-    tags: ["WC / RSS / MC", "感度係数", "位置度 Ⓜ"],
+    std: ["WC / RSS / MC", "位置度 Ⓜ"],
     open: "https://kotaooka.github.io/stackup-calc/",
     repo: "https://github.com/kotaooka/stackup-calc"
   },
   {
-    section: "drill",
+    section: "drill", fig: "chart",
     name: "QC2級ドリル",
     desc: "QC検定2級の出題範囲（レベル表164項目）を網羅。本試験形式の大問と模擬試験つき。",
-    tags: ["QC検定2級", "模擬試験", "Web / Android"],
+    std: ["QC検定2級"],
     open: "https://kotaooka.github.io/qc2-drill/",
     repo: "https://github.com/kotaooka/qc2-drill",
     android: "https://github.com/kotaooka/qc2-drill/releases/latest"
   },
   {
-    section: "drill",
+    section: "drill", fig: "fcf",
     name: "幾何公差ドリル",
     desc: "記号・データム・位置度・最大実体公差方式を、図面を読む問題で学ぶ。ISO・ASME との違いも。",
-    tags: ["JIS B 0021", "ISO / ASME 比較", "Web / Android"],
+    std: ["JIS B 0021", "ISO / ASME"],
     open: "https://kotaooka.github.io/gdt-drill/",
     repo: "https://github.com/kotaooka/gdt-drill",
     android: "https://github.com/kotaooka/gdt-drill/releases/latest"
   }
 ];
+
+// ===== 行の左に描く図（viewBox 132×88、色は currentColor） =====
+const W = 132, H = 88;
+const normal = (x, m, s) => Math.exp(-(((x - m) / s) ** 2) / 2);
+const path = pts => "M" + pts.map(p => p[0].toFixed(1) + " " + p[1].toFixed(1)).join("L");
+
+const figs = {
+  // 工程能力：ヒストグラムと分布曲線、規格線
+  cap() {
+    const base = 78, m = 66, s = 15, amp = 58;
+    let bars = "";
+    for (let i = -4; i < 4; i++) {
+      const x0 = m + i * 10, h = amp * 0.9 * normal(x0 + 5, m, s);
+      bars += `<rect x="${x0 + 1}" y="${base - h}" width="8" height="${h}" fill="var(--fig-weak)"/>`;
+    }
+    const curve = [];
+    for (let x = 18; x <= 114; x += 2) curve.push([x, base - amp * normal(x, m, s)]);
+    return `${bars}<path d="${path(curve)}" fill="none" stroke="currentColor" stroke-width="2"/>
+      <line x1="8" y1="${base}" x2="124" y2="${base}" stroke="currentColor" stroke-opacity=".4"/>
+      <line x1="22" y1="10" x2="22" y2="${base}" stroke="currentColor" stroke-dasharray="3 3" stroke-opacity=".7"/>
+      <line x1="112" y1="10" x2="112" y2="${base}" stroke="currentColor" stroke-dasharray="3 3" stroke-opacity=".7"/>`;
+  },
+  // 抜取検査：2つの方式の OC 曲線
+  oc() {
+    const x0 = 12, y0 = 80, w = 112, h = 68, pmax = 0.12;
+    const comb = (n, k) => { let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k + i) / i; return r; };
+    const pa = (n, c, p) => { let s = 0; for (let k = 0; k <= c; k++) s += comb(n, k) * p ** k * (1 - p) ** (n - k); return s; };
+    const line = (n, c) => { const pts = []; for (let i = 0; i <= 60; i++) { const p = i / 60 * pmax; pts.push([x0 + w * p / pmax, y0 - h * pa(n, c, p)]); } return path(pts); };
+    return `<path d="M${x0} ${y0 - h - 4}V${y0}H${x0 + w}" fill="none" stroke="currentColor" stroke-opacity=".4"/>
+      <path d="${line(50, 1)}" fill="none" stroke="currentColor" stroke-width="1.5" stroke-opacity=".5"/>
+      <path d="${line(125, 3)}" fill="none" stroke="currentColor" stroke-width="2"/>`;
+  },
+  // 公差積み上げ：部品 A・B・C とハウジング D、すき間
+  stack() {
+    const r = (x, y, w, s, fill) => `<rect x="${x}" y="${y}" width="${w}" height="24" rx="3" fill="${fill}" stroke="currentColor" stroke-width="1.5"/>
+      <text x="${x + w / 2}" y="${y + 16.5}" text-anchor="middle" font-size="11" font-family="var(--f-num)" fill="currentColor">${s}</text>`;
+    return r(8, 18, 34, "A", "none") + r(45, 18, 26, "B", "none") + r(74, 18, 30, "C", "none") +
+      `<rect x="107" y="18" width="17" height="24" fill="var(--fig-weak)" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2"/>` +
+      r(8, 50, 116, "D", "var(--fig-weak)");
+  },
+  // QC2級：管理図（中心線・管理限界と打点）
+  chart() {
+    const ys = [44, 36, 50, 41, 30, 47, 55, 39, 45, 33, 48, 42];
+    const pts = ys.map((y, i) => [12 + i * 10, y]);
+    return `<line x1="8" y1="14" x2="124" y2="14" stroke="currentColor" stroke-dasharray="4 3" stroke-opacity=".7"/>
+      <line x1="8" y1="44" x2="124" y2="44" stroke="currentColor" stroke-opacity=".4"/>
+      <line x1="8" y1="74" x2="124" y2="74" stroke="currentColor" stroke-dasharray="4 3" stroke-opacity=".7"/>
+      <path d="${path(pts)}" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      ${pts.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="2.6" fill="var(--panel)" stroke="currentColor" stroke-width="1.5"/>`).join("")}`;
+  },
+  // 幾何公差：位置度の公差記入枠（⌖ | ⌀0.1 Ⓜ | A | B）
+  fcf() {
+    const y = 30, h = 28;
+    const cell = [0, 28, 86, 106, 126];
+    const x = 3;
+    let s = `<rect x="${x}" y="${y}" width="${cell[4]}" height="${h}" fill="var(--panel)" stroke="currentColor" stroke-width="1.5"/>`;
+    for (const c of cell.slice(1, 4)) s += `<line x1="${x + c}" y1="${y}" x2="${x + c}" y2="${y + h}" stroke="currentColor" stroke-width="1.5"/>`;
+    const cx = x + 14, cy = y + h / 2;  // 位置度の記号
+    s += `<circle cx="${cx}" cy="${cy}" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M${cx - 10} ${cy}H${cx + 10}M${cx} ${cy - 10}V${cy + 10}" stroke="currentColor" stroke-width="1.5"/>`;
+    const t = (tx, str) => `<text x="${x + tx}" y="${y + 18.5}" text-anchor="middle" font-size="12" font-family="var(--f-num)" fill="currentColor">${str}</text>`;
+    s += t(57, "⌀0.1 Ⓜ") + t(96, "A") + t(116, "B");
+    return s;
+  }
+};
+
+// ===== 表示テーマの切り替え =====
+(() => {
+  const THEMES = ["auto", "light", "dark"];
+  const LABEL = { auto: "表示：自動", light: "表示：ライト", dark: "表示：ダーク" };
+  const btn = document.getElementById("themeBtn");
+  let theme = document.documentElement.dataset.theme || "auto";
+  const apply = t => {
+    if (t === "auto") document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.dataset.theme = t;
+    btn.textContent = LABEL[t];
+  };
+  btn.addEventListener("click", () => {
+    theme = THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length];
+    try { localStorage.setItem("qc-workbench-theme", theme); } catch (e) { /* 保存できなくても切り替えは効く */ }
+    apply(theme);
+  });
+  apply(theme);
+})();
 
 // ===== 描画（ここから下は通常いじらない） =====
 // テキストはすべて textContent で入れる（HTMLとして解釈させない）
@@ -180,8 +321,8 @@ function el(tag, cls, text) {
   if (text != null) e.textContent = text;
   return e;
 }
-function link(href, cls, text) {
-  const a = el("a", cls, text);
+function link(href, text) {
+  const a = el("a", null, text);
   a.href = href;
   return a;
 }
@@ -192,28 +333,41 @@ for (const [key, g] of Object.entries(groups)) {
   if (list.length === 0) continue;
 
   const sec = el("section");
-  sec.append(el("h2", null, g.title));
-  if (g.note) sec.append(el("p", "section-note", g.note));
+  const head = el("div", "group-head");
+  head.append(el("h2", null, g.title));
+  if (g.note) head.append(el("p", "group-note", g.note));
+  sec.append(head);
 
-  const grid = el("div", "grid");
+  const ul = el("ul", "list");
   for (const t of list) {
-    const card = el("article", "card");
-    card.append(el("h3", null, t.name));
-    card.append(el("p", null, t.desc));
+    const li = el("li", "row");
 
-    const chips = el("ul", "chips");
-    for (const tag of t.tags || []) chips.append(el("li", null, tag));
-    card.append(chips);
+    const fig = el("div", "fig");
+    fig.setAttribute("aria-hidden", "true");
+    if (figs[t.fig]) fig.innerHTML = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">${figs[t.fig]()}</svg>`;
+    li.append(fig);
 
-    const actions = el("div", "actions");
-    actions.append(link(t.open, "btn primary", "開く"));
-    if (t.android) actions.append(link(t.android, "btn sub", "Android"));
-    actions.append(link(t.repo, "btn sub", "GitHub"));
-    card.append(actions);
+    const body = el("div", "body");
+    const h3 = el("h3");
+    h3.append(link(t.open, t.name));
+    body.append(h3);
+    body.append(el("p", "desc", t.desc));
+    if (t.std && t.std.length) {
+      // 規格番号の途中で折り返さないよう、項目ごとに span で包む
+      const std = el("p", "std");
+      for (const v of t.std) std.append(el("span", null, v));
+      body.append(std);
+    }
+    li.append(body);
 
-    grid.append(card);
+    const sub = el("div", "sub");
+    if (t.android) sub.append(link(t.android, "Android 版"));
+    sub.append(link(t.repo, "GitHub"));
+    li.append(sub);
+
+    ul.append(li);
   }
-  sec.append(grid);
+  sec.append(ul);
   app.append(sec);
 }
 </script>

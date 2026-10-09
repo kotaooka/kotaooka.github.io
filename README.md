@@ -24,7 +24,7 @@ googlede6a9549483e5636.html    Search Console の所有権確認ファイル（�
 
 新しいツールを公開したら、次の4か所を更新する。
 
-1. **このリポジトリの `index.html`**：`tools` 配列に1項目を足す（`section`・`name`・`desc`・`tags`・`open`・`repo`、Android 版があれば `android`）。グループを増やすときは `groups` にも足す。
+1. **このリポジトリの `index.html`**：`tools` 配列に1項目を足す（`section`・`fig`・`name`・`desc`・`std`・`open`・`repo`、Android 版があれば `android`）。`fig` は行の左に描く図の名前で、`figs` に同じ名前の関数（viewBox 132×88 の SVG を返す。色は `currentColor`）を足す。グループを増やすときは `groups` にも足す。
 2. **このリポジトリの `sitemap.xml`**：`<url>` を1つ足し、`lastmod` を公開日にする。
 3. **ツール側の OGP**：`<head>` に description、canonical、`og:*`（`og:site_name` は `QC Workbench`）、`twitter:card` を入れ、1200×630 の `og.png` をツールの公開フォルダに置く。`og:image` は絶対 URL で書く。
 4. **ツール側の戻るリンク**：画面上部の見出しの前に `https://kotaooka.github.io/` へのリンク（表示は「QC Workbench ›」）を置く。
