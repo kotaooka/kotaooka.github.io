@@ -1,0 +1,5 @@
+# kotaooka.github.io 全体（各ツールのページを含む）に適用される
+User-agent: *
+Allow: /
+
+Sitemap: https://kotaooka.github.io/sitemap.xml

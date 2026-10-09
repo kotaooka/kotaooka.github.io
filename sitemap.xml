@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 検索エンジン向けのページ一覧。ツールを増やしたら url を追加し、lastmod を更新日に合わせる -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://kotaooka.github.io/</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://kotaooka.github.io/cpk-calc/</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://kotaooka.github.io/sampling-calc/</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://kotaooka.github.io/stackup-calc/</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://kotaooka.github.io/qc2-drill/</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://kotaooka.github.io/gdt-drill/</loc>
+    <lastmod>2026-10-09</lastmod>
+  </url>
+</urlset>
