@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>QC Workbench｜品質管理の計算ツールと問題集</title>
-<meta name="description" content="工程能力・抜取検査・公差積み上げの計算ツールと、QC検定2級・幾何公差の問題集。">
+<meta name="description" content="工程能力・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。">
 <meta name="theme-color" content="#1D5C7A">
 <meta property="og:title" content="QC Workbench｜品質管理の計算ツールと問題集">
-<meta property="og:description" content="工程能力・抜取検査・公差積み上げの計算ツールと、QC検定2級・幾何公差の問題集。">
+<meta property="og:description" content="工程能力・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kotaooka.github.io/">
 <meta property="og:site_name" content="QC Workbench">
@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://kotaooka.github.io/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="QC Workbench：工程能力解析・抜取検査計算機・公差積み上げ計算・QC2級ドリル・幾何公差ドリル">
+<meta property="og:image:alt" content="QC Workbench：工程能力解析・抜取検査計算機・公差積み上げ計算・色差累積ビューア・QC2級ドリル・幾何公差ドリル">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://kotaooka.github.io/">
 <!-- ファビコン（外部ファイル不要のインラインSVG） -->
@@ -161,7 +161,7 @@
       <h1>QC Workbench</h1>
       <button class="theme" id="themeBtn" type="button" aria-label="表示テーマを切り替え">表示：自動</button>
     </div>
-    <p class="lead">工程能力・抜取検査・公差積み上げの計算と、QC検定・幾何公差の学習。</p>
+    <p class="lead">工程能力・抜取検査・公差積み上げ・色差の計算と、QC検定・幾何公差の学習。</p>
   </header>
 
   <main id="app"></main>
@@ -208,6 +208,14 @@ const tools = [
     std: ["WC / RSS / MC", "位置度 Ⓜ"],
     open: "https://kotaooka.github.io/stackup-calc/",
     repo: "https://github.com/kotaooka/stackup-calc"
+  },
+  {
+    section: "calc", fig: "lab",
+    name: "色差累積ビューア",
+    desc: "ターゲット → 承認塗板 → 製品 の2段の色差から、製品の色差・ずれの向き・許容差の余裕を図示。5角度とフロップインデックスにも対応。",
+    std: ["CIE76 / CIE94 / CMC", "CIEDE2000", "FI"],
+    open: "https://kotaooka.github.io/deltae-calc/",
+    repo: "https://github.com/kotaooka/deltae-calc"
   },
   {
     section: "drill", fig: "chart",
@@ -267,6 +275,21 @@ const figs = {
     return r(8, 18, 34, "A", "none") + r(45, 18, 26, "B", "none") + r(74, 18, 30, "C", "none") +
       `<rect x="107" y="18" width="17" height="24" fill="var(--fig-weak)" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2"/>` +
       r(8, 50, 116, "D", "var(--fig-weak)");
+  },
+  // 色差：a*b* 平面の許容範囲と、ターゲット → 承認塗板 → 製品 の矢印
+  lab() {
+    const t = [40, 62], p = [66, 42], x = [92, 22], r = 4.5;
+    const seg = (a, b, w, dash) => {
+      const L = Math.hypot(b[0] - a[0], b[1] - a[1]), ux = (b[0] - a[0]) / L, uy = (b[1] - a[1]) / L, g = r + 2;
+      const e = [b[0] - ux * g, b[1] - uy * g], hb = [e[0] - ux * 6, e[1] - uy * 6];
+      return `<path d="M${a[0] + ux * g} ${a[1] + uy * g}L${hb[0]} ${hb[1]}" stroke="currentColor" stroke-width="${w}"${dash ? ' stroke-dasharray="3 2" stroke-opacity=".55"' : ""}/>
+        <path d="M${e[0]} ${e[1]}L${hb[0] + uy * 3.5} ${hb[1] - ux * 3.5}L${hb[0] - uy * 3.5} ${hb[1] + ux * 3.5}Z" fill="currentColor"${dash ? ' fill-opacity=".55"' : ""}/>`;
+    };
+    return `<ellipse cx="${t[0] + 14}" cy="${t[1] - 18}" rx="44" ry="36" fill="var(--fig-weak)" stroke="currentColor" stroke-dasharray="4 3" stroke-opacity=".7"/>
+      <line x1="10" y1="${t[1]}" x2="124" y2="${t[1]}" stroke="currentColor" stroke-opacity=".4"/>
+      <line x1="${t[0]}" y1="4" x2="${t[0]}" y2="84" stroke="currentColor" stroke-opacity=".4"/>
+      ${seg(t, p, 2)}${seg(p, x, 2)}
+      ${[t, p, x].map(q => `<circle cx="${q[0]}" cy="${q[1]}" r="${r}" fill="var(--panel)" stroke="currentColor" stroke-width="1.8"/>`).join("")}`;
   },
   // QC2級：管理図（中心線・管理限界と打点）
   chart() {
