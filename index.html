@@ -368,7 +368,9 @@ const figs = {
   const THEMES = ["auto", "light", "dark"];
   const LABEL = { auto: "表示：自動", light: "表示：ライト", dark: "表示：ダーク" };
   const btn = document.getElementById("themeBtn");
-  let theme = document.documentElement.dataset.theme || "auto";
+  const THEME_KEY = "qc-workbench-theme";
+  const readTheme = () => { try { const t = localStorage.getItem(THEME_KEY); return THEMES.includes(t) ? t : "auto"; } catch (e) { return "auto"; } };
+  let theme = readTheme();
   const apply = t => {
     if (t === "auto") document.documentElement.removeAttribute("data-theme");
     else document.documentElement.dataset.theme = t;
@@ -376,9 +378,11 @@ const figs = {
   };
   btn.addEventListener("click", () => {
     theme = THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length];
-    try { localStorage.setItem("qc-workbench-theme", theme); } catch (e) { /* 保存できなくても切り替えは効く */ }
+    try { localStorage.setItem(THEME_KEY, theme); } catch (e) { /* 保存できなくても切り替えは効く */ }
     apply(theme);
   });
+  // 別のタブや別のツールで切り替えたら、このページにも反映する
+  window.addEventListener("storage", e => { if (e.key === THEME_KEY || e.key === null) { theme = readTheme(); apply(theme); } });
   apply(theme);
 })();
 
