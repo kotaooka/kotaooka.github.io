@@ -41,6 +41,8 @@
     --line: #d5dce3;
     --accent: #1d5c96;
     --accent-weak: #e1ebf5;
+    --ok: #17703a;
+    --ok-weak: #e2f2e7;
     --fig: #1d5c96;
     --fig-weak: rgba(29, 92, 150, .14);
     --f-ui: "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
@@ -57,6 +59,8 @@
       --line: #2b3641;
       --accent: #6ba6df;
       --accent-weak: #1c2f43;
+      --ok: #57c483;
+      --ok-weak: #163222;
       --fig: #6ba6df;
       --fig-weak: rgba(107, 166, 223, .16);
       color-scheme: dark;
@@ -71,6 +75,8 @@
     --line: #2b3641;
     --accent: #6ba6df;
     --accent-weak: #1c2f43;
+    --ok: #57c483;
+    --ok-weak: #163222;
     --fig: #6ba6df;
     --fig-weak: rgba(107, 166, 223, .16);
     color-scheme: dark;
@@ -96,8 +102,19 @@
   }
   .theme:hover { border-color: var(--accent); color: var(--accent); }
   .theme:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  h1 { font-size: 2.1rem; line-height: 1.2; margin: 0 0 10px; letter-spacing: .01em; }
+  h1 { display: flex; align-items: center; gap: 12px; font-size: 2.1rem; line-height: 1.2; margin: 0 0 10px; letter-spacing: .01em; }
+  h1 svg { flex: none; width: 40px; height: 40px; }
   .lead { margin: 0; color: var(--ink2); font-size: 1rem; }
+  /* 端末内で処理する旨（DESIGN.md 1.2 の --ok）。色だけに頼らず記号と文で示す */
+  .local {
+    display: inline-flex; align-items: baseline; gap: 6px; margin: 14px 0 0; padding: 4px 12px;
+    border-radius: 6px; background: var(--ok-weak); color: var(--ok); font-size: .84rem; font-weight: 700;
+  }
+  /* グループへの目次 */
+  .toc { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 18px 0 0; padding: 0; list-style: none; font-size: .9rem; font-weight: 700; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .toc .n { margin-left: 4px; color: var(--muted); font-family: var(--f-num); font-size: .78rem; font-weight: 500; }
 
   /* グループ */
   section { margin-top: 36px; }
@@ -113,7 +130,8 @@
     border-radius: 12px;
     overflow: hidden;
   }
-  .row { position: relative; display: grid; grid-template-columns: 132px 1fr auto; gap: 20px; align-items: center; padding: 18px 20px; }
+  section { scroll-margin-top: 16px; }
+  .row { position: relative; display: grid; grid-template-columns: 132px 1fr 20px; gap: 20px; align-items: center; padding: 18px 20px; }
   .row + .row { border-top: 1px solid var(--line); }
   .row:hover { background: var(--accent-weak); }
   .row:focus-within { background: var(--accent-weak); }
@@ -127,20 +145,36 @@
   h3 a:focus-visible { outline: none; }
   .row:has(h3 a:focus-visible) { outline: 3px solid var(--accent); outline-offset: -3px; }
   .desc { margin: 0; color: var(--ink2); font-size: .9rem; }
-  .std { margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 0 14px; font-family: var(--f-num); font-size: .76rem; color: var(--muted); letter-spacing: .01em; }
-  .std span { white-space: nowrap; }
-  .sub { display: flex; flex-direction: column; align-items: stretch; gap: 6px; font-size: .82rem; white-space: nowrap; }
-  /* GitHub・Android 版は小さめの枠つきボタン（行のリンクより手前に置く） */
+  .meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 14px; margin: 6px 0 0; }
+  .std { display: contents; font-size: .76rem; color: var(--muted); }
+  .std span { white-space: nowrap; font-size: .76rem; color: var(--muted); }
+  /* 規格番号・記号は等幅、日本語の手法名は本文の字体（等幅の代替字体で字間が開くのを避ける） */
+  .std .code { font-family: var(--f-num); letter-spacing: .01em; }
+  .std .jp { font-family: var(--f-ui); }
+  /* GitHub・Android 版は控えめな文字リンク（行のリンクより手前に置く） */
+  .sub { display: contents; }
   .sub a {
     position: relative; z-index: 1;
-    display: inline-flex; align-items: center; justify-content: center;
-    min-height: 32px; padding: 0 14px;
-    border: 1px solid var(--line); border-radius: 6px;
-    background: var(--panel); color: var(--ink2);
-    font-weight: 700; text-decoration: none;
+    color: var(--ink2); font-size: .78rem; font-weight: 700; white-space: nowrap;
+    text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px;
   }
-  .sub a:hover { border-color: var(--accent); color: var(--accent); }
-  .sub a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .sub a:hover { color: var(--accent); text-decoration-color: currentColor; }
+  .sub a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+  .sub a:first-child { margin-left: auto; }
+  /* 行の右端の「›」（開けることを示す） */
+  .go { color: var(--muted); font-size: 1.6rem; line-height: 1; text-align: center; }
+  @media (hover: hover) {
+    .row::before {
+      content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: var(--accent); transform: scaleY(0); transition: transform .15s ease;
+    }
+    .row:hover::before { transform: scaleY(1); }
+    .go { transition: transform .15s ease, color .15s; }
+    .row:hover .go { transform: translateX(3px); color: var(--accent); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .row::before, .go { transition: none; }
+  }
 
   footer { margin: 48px 0 36px; color: var(--muted); font-size: .8rem; }
   footer a { color: inherit; }
@@ -149,9 +183,13 @@
   @media (max-width: 600px) {
     header { padding-top: 40px; }
     h1 { font-size: 1.7rem; }
-    .row { grid-template-columns: 84px 1fr; gap: 14px; padding: 16px; align-items: start; }
-    .fig { width: 84px; height: 56px; margin-top: 4px; }
-    .sub { grid-column: 2; flex-direction: row; gap: 8px; }
+    h1 svg { width: 32px; height: 32px; }
+    .row { grid-template-columns: 72px 1fr 14px; gap: 12px; padding: 14px; align-items: start; }
+    .fig { width: 72px; height: 48px; margin-top: 4px; }
+    .go { align-self: center; font-size: 1.3rem; }
+    /* スマホでは説明を2行で切る（全文はツールの画面にある） */
+    .desc { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
+    .sub a:first-child { margin-left: 0; }
   }
 </style>
 </head>
@@ -159,10 +197,12 @@
 <div class="wrap">
   <header>
     <div class="head-row">
-      <h1>QC Workbench</h1>
+      <h1><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--accent)"/><path d="M6 22c4 0 5-12 10-12s6 12 10 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>QC Workbench</h1>
       <button class="theme" id="themeBtn" type="button" aria-label="表示テーマを切り替え">表示：自動</button>
     </div>
     <p class="lead">品質管理のための計算ツールと、QC検定・幾何公差の問題集。</p>
+    <p class="local"><span aria-hidden="true">✓</span>入力したデータやファイルは端末の中だけで処理され、外部に送信されません。</p>
+    <ul class="toc" id="toc"></ul>
   </header>
 
   <main id="app"></main>
@@ -181,9 +221,9 @@
 // android : Android版の配布ページ（無ければ省略）
 // std     : 準拠規格・主な手法（短く）
 const groups = {
-  calc:  { title: "計算ツール", note: "入力したデータは端末の中だけで処理され、外部に送信されません。" },
+  calc:  { title: "計算ツール" },
   drill: { title: "問題集",     note: "計算問題は毎回数値が変わります。間隔反復による復習つき。" },
-  other: { title: "その他",     note: "入力した値やファイルは端末の中だけで処理され、外部に送信されません。" }
+  other: { title: "その他" }
 };
 
 const tools = [
@@ -222,7 +262,7 @@ const tools = [
   {
     section: "calc", fig: "oc",
     name: "抜取検査計算機",
-    desc: "ロットの合格確率、AQL方式の n・c、OC曲線の比較、抜取方式の逆設計、不良率の区間推定。",
+    desc: "合格確率、AQL方式の n・c、OC曲線での方式の比較と逆設計、不良率の区間推定。",
     std: ["MIL-STD-105E", "超幾何分布", "Clopper-Pearson"],
     open: "https://kotaooka.github.io/sampling-calc/",
     repo: "https://github.com/kotaooka/sampling-calc"
@@ -255,7 +295,7 @@ const tools = [
   {
     section: "drill", fig: "fcf",
     name: "幾何公差ドリル",
-    desc: "記号・データム・位置度・最大実体公差方式を、図面を読む問題で学ぶ。ISO・ASME との違いも。",
+    desc: "記号・データム・位置度・最大実体公差方式を図面で学ぶ。ISO・ASME との違いも。",
     std: ["JIS B 0021", "ISO / ASME"],
     open: "https://kotaooka.github.io/gdt-drill/",
     repo: "https://github.com/kotaooka/gdt-drill",
@@ -468,6 +508,10 @@ for (const [key, g] of Object.entries(groups)) {
   if (list.length === 0) continue;
 
   const sec = el("section");
+  sec.id = key;
+  // 目次に足す
+  const li0 = el("li"); const a0 = link("#" + key, g.title); a0.append(el("span", "n", String(list.length))); li0.append(a0);
+  document.getElementById("toc").append(li0);
   const head = el("div", "group-head");
   head.append(el("h2", null, g.title));
   if (g.note) head.append(el("p", "group-note", g.note));
@@ -487,18 +531,23 @@ for (const [key, g] of Object.entries(groups)) {
     h3.append(link(t.open, t.name));
     body.append(h3);
     body.append(el("p", "desc", t.desc));
+    const meta = el("div", "meta");
     if (t.std && t.std.length) {
-      // 規格番号の途中で折り返さないよう、項目ごとに span で包む
+      // 規格番号の途中で折り返さないよう、項目ごとに span で包む。日本語を含む項目は本文の字体にする
       const std = el("p", "std");
-      for (const v of t.std) std.append(el("span", null, v));
-      body.append(std);
+      for (const v of t.std) std.append(el("span", /[\u3040-\u30ff\u4e00-\u9fff]/.test(v) ? "jp" : "code", v));
+      meta.append(std);
     }
-    li.append(body);
-
-    const sub = el("div", "sub");
+    const sub = el("span", "sub");
     if (t.android) sub.append(link(t.android, "Android 版"));
     sub.append(link(t.repo, "GitHub"));
-    li.append(sub);
+    meta.append(sub);
+    body.append(meta);
+    li.append(body);
+
+    const go = el("span", "go", "›");
+    go.setAttribute("aria-hidden", "true");
+    li.append(go);
 
     ul.append(li);
   }
