@@ -184,11 +184,14 @@
     header { padding-top: 40px; }
     h1 { font-size: 1.7rem; }
     h1 svg { width: 32px; height: 32px; }
-    .row { grid-template-columns: 72px 1fr 14px; gap: 12px; padding: 14px; align-items: start; }
-    .fig { width: 72px; height: 48px; margin-top: 4px; }
-    .go { align-self: center; font-size: 1.3rem; }
-    /* スマホでは説明を2行で切る（全文はツールの画面にある） */
-    .desc { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
+    /* スマホ：図を見出しの左に小さく置き、説明文は行の全幅に広げる */
+    .row { grid-template-columns: 48px 1fr 14px; gap: 6px 12px; padding: 14px 14px 14px 16px; align-items: center; }
+    .body { display: contents; }
+    .fig { grid-column: 1; grid-row: 1; width: 48px; height: 32px; }
+    h3 { grid-column: 2; grid-row: 1; margin: 0; }
+    .desc, .meta { grid-column: 1 / 3; }
+    .meta { margin-top: 0; }
+    .go { grid-column: 3; grid-row: 1 / 4; align-self: center; font-size: 1.3rem; }
     .sub a:first-child { margin-left: 0; }
   }
 </style>
@@ -230,7 +233,7 @@ const tools = [
   {
     section: "calc", fig: "cap",
     name: "工程能力解析",
-    desc: "Excel・CSV の測定データから Cp・Cpk・Pp・Ppk、管理図、ヒストグラム、F検定・t検定・相関を計算。必要データ数の見積もりも。",
+    desc: "Excel・CSV の測定データから Cp・Cpk・Pp・Ppk、管理図、ヒストグラム、F検定・t検定・相関、必要データ数の見積もり",
     std: ["Cp / Cpk / Pp / Ppk", "JIS Z 9020-2"],
     open: "https://kotaooka.github.io/cpk-calc/",
     repo: "https://github.com/kotaooka/cpk-calc"
@@ -238,7 +241,7 @@ const tools = [
   {
     section: "calc", fig: "gauge",
     name: "測定システム解析",
-    desc: "ゲージR&R（ANOVA 法・平均範囲法）で繰り返し性・再現性を分け、%GRR と ndc を判定。偏り・直線性・安定性、Type-1（Cg・Cgk）、計数値の κ・有効性も。",
+    desc: "ゲージR&R（ANOVA 法・平均範囲法）で繰り返し性・再現性を分け、%GRR と ndc を判定。偏り・直線性・安定性、Type-1（Cg・Cgk）、計数値の κ・有効性を評価",
     std: ["AIAG MSA 第4版", "%GRR / ndc", "κ"],
     open: "https://kotaooka.github.io/msa-calc/",
     repo: "https://github.com/kotaooka/msa-calc"
@@ -246,7 +249,7 @@ const tools = [
   {
     section: "calc", fig: "logit",
     name: "2値データの要因解析",
-    desc: "合否・発生の有無のような2値の結果と測定値の関係をロジスティック回帰で解析。効いている変数、確率の地図、目標の確率になる条件の逆算。",
+    desc: "合否・発生の有無のような2値の結果と測定値の関係をロジスティック回帰で解析。効いている変数、確率の地図、目標の確率になる条件の逆算",
     std: ["ロジスティック回帰", "Firth 法", "オッズ比 / AUC"],
     open: "https://kotaooka.github.io/logit-calc/",
     repo: "https://github.com/kotaooka/logit-calc"
@@ -254,7 +257,7 @@ const tools = [
   {
     section: "calc", fig: "doe",
     name: "実験計画法",
-    desc: "直交表への割り付けから実験順序表、分散分析・要因効果図、最適条件の推定まで。タグチメソッドの SN比・2 段階設計・確認実験にも対応。",
+    desc: "直交表への割り付けから実験順序表、分散分析・要因効果図、最適条件の推定まで。タグチメソッドの SN比・2 段階設計・確認実験にも対応",
     std: ["直交表 L4〜L18", "擬水準法", "SN比"],
     open: "https://kotaooka.github.io/doe-calc/",
     repo: "https://github.com/kotaooka/doe-calc"
@@ -262,7 +265,7 @@ const tools = [
   {
     section: "calc", fig: "oc",
     name: "抜取検査計算機",
-    desc: "合格確率、AQL方式の n・c、OC曲線での方式の比較と逆設計、不良率の区間推定。",
+    desc: "合格確率、AQL方式の n・c、OC曲線での方式の比較と逆設計、不良率の区間推定",
     std: ["MIL-STD-105E", "超幾何分布", "Clopper-Pearson"],
     open: "https://kotaooka.github.io/sampling-calc/",
     repo: "https://github.com/kotaooka/sampling-calc"
@@ -270,7 +273,7 @@ const tools = [
   {
     section: "calc", fig: "stack",
     name: "公差積み上げ計算",
-    desc: "寸法チェーンをブロック図で組み、ワーストケース・RSS・補正RSS・モンテカルロで評価。2次元ベクトルループと幾何公差にも対応。",
+    desc: "寸法チェーンをブロック図で組み、ワーストケース・RSS・補正RSS・モンテカルロで評価。2次元ベクトルループと幾何公差にも対応",
     std: ["WC / RSS / MC", "位置度 Ⓜ"],
     open: "https://kotaooka.github.io/stackup-calc/",
     repo: "https://github.com/kotaooka/stackup-calc"
@@ -278,7 +281,7 @@ const tools = [
   {
     section: "calc", fig: "lab",
     name: "色差累積ビューア",
-    desc: "試料 A → B → C … と色を引き継いだときの各段と累積の色差、ずれの向き、許容差の余裕を図示。2色の中間色も計算。5角度とフロップインデックスにも対応。",
+    desc: "試料 A → B → C … と色を引き継いだときの各段と累積の色差、ずれの向き、許容差の余裕を図示。2色の中間色も計算。5角度とフロップインデックスにも対応",
     std: ["CIE76 / CIE94 / CMC", "CIEDE2000", "FI"],
     open: "https://kotaooka.github.io/deltae-calc/",
     repo: "https://github.com/kotaooka/deltae-calc"
@@ -286,7 +289,7 @@ const tools = [
   {
     section: "drill", fig: "chart",
     name: "QC2級ドリル",
-    desc: "QC検定2級の出題範囲（レベル表164項目）を網羅。本試験形式の大問と模擬試験つき。",
+    desc: "QC検定2級の出題範囲（レベル表164項目）を網羅。本試験形式の大問と模擬試験つき",
     std: ["QC検定2級"],
     open: "https://kotaooka.github.io/qc2-drill/",
     repo: "https://github.com/kotaooka/qc2-drill",
@@ -295,7 +298,7 @@ const tools = [
   {
     section: "drill", fig: "fcf",
     name: "幾何公差ドリル",
-    desc: "記号・データム・位置度・最大実体公差方式を図面で学ぶ。ISO・ASME との違いも。",
+    desc: "記号・データム・位置度・最大実体公差方式と、ISO・ASME との違いを図面で学ぶ",
     std: ["JIS B 0021", "ISO / ASME"],
     open: "https://kotaooka.github.io/gdt-drill/",
     repo: "https://github.com/kotaooka/gdt-drill",
@@ -304,7 +307,7 @@ const tools = [
   {
     section: "other", fig: "pdf",
     name: "PDF圧縮",
-    desc: "PDF のファイルサイズを小さくする。強さを選ぶか、1 ファイルの上限を決めて画質を自動で選ぶ。圧縮前後のページを並べて画質を確認。",
+    desc: "PDF のファイルサイズを小さくする。強さを選ぶか、1 ファイルの上限を決めて画質を自動で選ぶ。圧縮前後のページを並べて画質を確認",
     std: ["Ghostscript", "上限サイズ指定", "一括・ZIP"],
     open: "https://kotaooka.github.io/PDFComp/",
     repo: "https://github.com/kotaooka/PDFComp"
@@ -312,7 +315,7 @@ const tools = [
   {
     section: "other", fig: "tri",
     name: "三角形計算機",
-    desc: "辺の長さ・角度から一般三角形と直角三角形を解き、面積・高さ・外接円まで。勾配・テーパーの換算、座標からの距離と角度も。図の頂点をドラッグして形を変えられる。",
+    desc: "辺の長さ・角度から一般三角形と直角三角形を解き、面積・高さ・外接円まで。勾配・テーパーの換算、座標からの距離と角度の計算。図の頂点をドラッグして形を変えられる",
     std: ["正弦・余弦定理", "勾配 / テーパー", "度分秒"],
     open: "https://kotaooka.github.io/triangle-calc/",
     repo: "https://github.com/kotaooka/triangle-calc"
