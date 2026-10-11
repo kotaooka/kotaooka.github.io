@@ -13,9 +13,10 @@ FONT_DIR = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "/usr/share/fonts/
 
 SUBTITLE = ["品質管理の計算ツールと、", "QC検定・幾何公差の問題集"]
 TOOLS = [
-    ["工程能力解析", "測定システム解析", "抜取検査計算機"],
-    ["2値データの要因解析", "公差積み上げ計算"],
-    ["色差累積ビューア", "QC2級ドリル", "幾何公差ドリル"],
+    ["工程能力解析", "測定システム解析", "実験計画法"],
+    ["2値データの要因解析", "抜取検査計算機"],
+    ["公差積み上げ計算", "色差累積ビューア"],
+    ["QC2級ドリル", "幾何公差ドリル"],
 ]
 TOP, BOTTOM = (28, 91, 121), (25, 82, 110)
 K = 2  # 縮小前の倍率（アンチエイリアス用）
@@ -44,7 +45,8 @@ def main():
         assert 72 * K + d.textlength(line, font=font("Regular", 28)) < 770 * K, f"副題の行が図に重なる: {line}"
 
     pf = font("Regular", 24)
-    y = 402 * K
+    # ツール名は 4 行。行の間隔を詰めて画像の下端に収める
+    y = 376 * K
     for row in TOOLS:
         x = 72 * K
         for name in row:
@@ -53,7 +55,7 @@ def main():
             d.text((x + 23 * K, y + 9 * K), name, font=pf, fill=(255, 255, 255))
             x += w + 14 * K
         assert x < 770 * K, f"ツール名の行が図に重なる: {row}"
-        y += 66 * K
+        y += 60 * K
 
     # 右側の図：分布曲線と規格線
     x0, x1, base, m, s, amp = 770, 1185, 500, 985, 62, 250

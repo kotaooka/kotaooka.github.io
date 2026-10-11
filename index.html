@@ -161,7 +161,7 @@
       <h1>QC Workbench</h1>
       <button class="theme" id="themeBtn" type="button" aria-label="表示テーマを切り替え">表示：自動</button>
     </div>
-    <p class="lead">工程能力・測定システム解析・2値データの要因解析・抜取検査・公差積み上げ・色差の計算と、QC検定・幾何公差の学習。</p>
+    <p class="lead">工程能力・測定システム解析・2値データの要因解析・実験計画法・抜取検査・公差積み上げ・色差の計算と、QC検定・幾何公差の学習。</p>
   </header>
 
   <main id="app"></main>
@@ -208,6 +208,14 @@ const tools = [
     std: ["ロジスティック回帰", "Firth 法", "オッズ比 / AUC"],
     open: "https://kotaooka.github.io/logit-calc/",
     repo: "https://github.com/kotaooka/logit-calc"
+  },
+  {
+    section: "calc", fig: "doe",
+    name: "実験計画法",
+    desc: "直交表への割り付けから実験順序表、分散分析・要因効果図、最適条件の推定まで。タグチメソッドの SN比・2 段階設計・確認実験にも対応。",
+    std: ["直交表 L4〜L18", "擬水準法", "SN比"],
+    open: "https://kotaooka.github.io/doe-calc/",
+    repo: "https://github.com/kotaooka/doe-calc"
   },
   {
     section: "calc", fig: "oc",
@@ -303,6 +311,19 @@ const figs = {
       <path d="${path(curve)}" fill="none" stroke="currentColor" stroke-width="2"/>
       ${lo.map(x => `<circle cx="${x}" cy="${bot + 7}" r="2.8" fill="var(--panel)" stroke="currentColor" stroke-width="1.4"/>`).join("")}
       ${hi.map(x => `<circle cx="${x}" cy="${top - 7}" r="2.8" fill="var(--fig-weak)" stroke="currentColor" stroke-width="1.4"/>`).join("")}`;
+  },
+  // 実験計画法：要因効果図（3 因子 × 3 水準、良い水準を強調。右端はプールした因子）
+  doe() {
+    const panels = [[54, 42, 34], [66, 40, 16], [42, 46, 40]], pw = 38, x0 = 9, top = 8, bot = 76;
+    let s = `<line x1="${x0}" y1="44" x2="${x0 + pw * 3}" y2="44" stroke="currentColor" stroke-dasharray="3 3" stroke-opacity=".5"/>`;
+    panels.forEach((ys, i) => {
+      const px = j => x0 + i * pw + pw * (j + 0.5) / 3;
+      if (i) s += `<line x1="${x0 + i * pw}" y1="${top}" x2="${x0 + i * pw}" y2="${bot}" stroke="currentColor" stroke-opacity=".25"/>`;
+      const pooled = i === 2, best = ys.indexOf(Math.min(...ys));
+      s += `<path d="${path(ys.map((y, j) => [px(j), y]))}" fill="none" stroke="currentColor" stroke-width="${pooled ? 1.2 : 2}"${pooled ? ' stroke-dasharray="3 2" stroke-opacity=".55"' : ""}/>`;
+      s += ys.map((y, j) => `<circle cx="${px(j).toFixed(1)}" cy="${y}" r="${j === best && !pooled ? 3.8 : 2.6}" fill="${j === best && !pooled ? "var(--fig-weak)" : "var(--panel)"}" stroke="currentColor" stroke-width="1.5"${pooled ? ' stroke-opacity=".55"' : ""}/>`).join("");
+    });
+    return s + `<line x1="${x0}" y1="${bot + 4}" x2="${x0 + pw * 3}" y2="${bot + 4}" stroke="currentColor" stroke-opacity=".4"/>`;
   },
   // 抜取検査：2つの方式の OC 曲線
   oc() {
