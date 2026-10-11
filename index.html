@@ -182,7 +182,7 @@
 const groups = {
   calc:  { title: "計算ツール", note: "入力したデータは端末の中だけで処理され、外部に送信されません。" },
   drill: { title: "問題集",     note: "計算問題は毎回数値が変わります。間隔反復による復習つき。" },
-  file:  { title: "書類",       note: "ファイルは端末の中だけで処理され、外部に送信されません。" }
+  other: { title: "その他",     note: "ファイルは端末の中だけで処理され、外部に送信されません。" }
 };
 
 const tools = [
@@ -261,7 +261,7 @@ const tools = [
     android: "https://github.com/kotaooka/gdt-drill/releases/latest"
   },
   {
-    section: "file", fig: "pdf",
+    section: "other", fig: "pdf",
     name: "PDF圧縮",
     desc: "検査成績書のスキャンや写真入りの報告書を、添付できる大きさに縮める。強さを選ぶか、1 ファイルの上限を決めて画質を自動で選ぶ。圧縮前後のページを並べて画質を確認。",
     std: ["Ghostscript", "上限サイズ指定", "一括・ZIP"],
