@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>QC Workbench｜品質管理の計算ツールと問題集</title>
 <meta name="description" content="工程能力・測定システム解析・2値データの要因解析・実験計画法・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。書類の PDF 圧縮も。">
-<meta name="theme-color" content="#1D5C7A">
+<meta name="theme-color" content="#1d5c96" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#11161b" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="QC Workbench｜品質管理の計算ツールと問題集">
 <meta property="og:description" content="工程能力・測定システム解析・2値データの要因解析・実験計画法・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。書類の PDF 圧縮も。">
 <meta property="og:type" content="website">
@@ -20,7 +21,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://kotaooka.github.io/">
 <!-- ファビコン（外部ファイル不要のインラインSVG） -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231D5C7A'/%3E%3Cpath d='M6 22c4 0 5-12 10-12s6 12 10 12' fill='none' stroke='%23fff' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d5c96'/%3E%3Cpath d='M6 22c4 0 5-12 10-12s6 12 10 12' fill='none' stroke='%23fff' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
 <script>
   // 保存したテーマ（auto / light / dark）を描画前に当てる
   try { const t = localStorage.getItem("qc-workbench-theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) { /* 保存できない環境 */ }
@@ -30,48 +31,48 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
-  /* 色はここだけで管理する（og画像・ドリル系アプリと同じ #1D5C7A を基調） */
+  /* 色はここだけで管理する。値は計算ツールと共通（DESIGN.md）。og 画像も同じ #1d5c96 を基調にする */
   :root {
-    --bg: #eef2f4;
+    --bg: #eef1f4;
     --panel: #ffffff;
-    --ink: #15232c;
-    --ink2: #44535e;
-    --muted: #6f7d87;
-    --line: #d6dee3;
-    --accent: #1D5C7A;
-    --accent-weak: #e3eef3;
-    --fig: #1D5C7A;
-    --fig-weak: rgba(29, 92, 122, .14);
+    --ink: #15212c;
+    --ink2: #475563;
+    --muted: #74818e;
+    --line: #d5dce3;
+    --accent: #1d5c96;
+    --accent-weak: #e1ebf5;
+    --fig: #1d5c96;
+    --fig-weak: rgba(29, 92, 150, .14);
     --f-ui: "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
     --f-num: "IBM Plex Mono", ui-monospace, "Consolas", monospace;
   }
   /* ダーク：表示が「自動」なら OS の設定に従い、「ダーク」なら常に適用（計算ツールと同じ仕組み） */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #10171c;
-      --panel: #172129;
-      --ink: #e3eaee;
-      --ink2: #b3c0c8;
-      --muted: #8a99a3;
-      --line: #27333c;
-      --accent: #6fb3d2;
-      --accent-weak: #1c2d37;
-      --fig: #7fbcd8;
-      --fig-weak: rgba(127, 188, 216, .16);
+      --bg: #11161b;
+      --panel: #19212a;
+      --ink: #e6ecf2;
+      --ink2: #a9b5c1;
+      --muted: #7d8996;
+      --line: #2b3641;
+      --accent: #6ba6df;
+      --accent-weak: #1c2f43;
+      --fig: #6ba6df;
+      --fig-weak: rgba(107, 166, 223, .16);
       color-scheme: dark;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #10171c;
-    --panel: #172129;
-    --ink: #e3eaee;
-    --ink2: #b3c0c8;
-    --muted: #8a99a3;
-    --line: #27333c;
-    --accent: #6fb3d2;
-    --accent-weak: #1c2d37;
-    --fig: #7fbcd8;
-    --fig-weak: rgba(127, 188, 216, .16);
+    --bg: #11161b;
+    --panel: #19212a;
+    --ink: #e6ecf2;
+    --ink2: #a9b5c1;
+    --muted: #7d8996;
+    --line: #2b3641;
+    --accent: #6ba6df;
+    --accent-weak: #1c2f43;
+    --fig: #6ba6df;
+    --fig-weak: rgba(107, 166, 223, .16);
     color-scheme: dark;
   }
   * { box-sizing: border-box; }

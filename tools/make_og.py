@@ -18,7 +18,7 @@ TOOLS = [
     ["公差積み上げ計算", "色差累積ビューア"],
     ["QC2級ドリル", "幾何公差ドリル", "PDF圧縮"],
 ]
-TOP, BOTTOM = (28, 91, 121), (25, 82, 110)
+TOP, BOTTOM = (29, 92, 150), (26, 83, 136)  # 計算ツールのアクセント #1d5c96 から少し暗く
 K = 2  # 縮小前の倍率（アンチエイリアス用）
 
 
@@ -36,7 +36,7 @@ def main():
         t = y / H
         g.line([(0, y), (W, y)], fill=tuple(round(TOP[i] + (BOTTOM[i] - TOP[i]) * t) for i in range(3)))
     d = ImageDraw.Draw(im, "RGBA")
-    soft = (222, 233, 240)
+    soft = (222, 232, 244)
 
     d.text((72 * K, 104 * K), "kotaooka.github.io", font=font("Regular", 26), fill=soft)
     d.text((70 * K, 152 * K), "QC Workbench", font=font("Bold", 82), fill=(255, 255, 255))
@@ -61,7 +61,7 @@ def main():
     x0, x1, base, m, s, amp = 770, 1185, 500, 985, 62, 250
     curve = [(xx * K, (base - amp * math.exp(-((xx - m) / s) ** 2 / 2)) * K) for xx in range(x0, x1 + 1, 2)]
     d.polygon(curve + [(x1 * K, base * K), (x0 * K, base * K)], fill=(255, 255, 255, 30))
-    d.line(curve, fill=(225, 236, 242), width=4 * K, joint="curve")
+    d.line(curve, fill=(225, 235, 246), width=4 * K, joint="curve")
     d.line([(x0 * K, base * K), (x1 * K, base * K)], fill=(255, 255, 255, 90), width=2 * K)
     lf = font("Regular", 20)
     for xx, lab in ((796, "LSL"), (1160, "USL")):
