@@ -182,7 +182,7 @@
 const groups = {
   calc:  { title: "計算ツール", note: "入力したデータは端末の中だけで処理され、外部に送信されません。" },
   drill: { title: "問題集",     note: "計算問題は毎回数値が変わります。間隔反復による復習つき。" },
-  other: { title: "その他",     note: "ファイルは端末の中だけで処理され、外部に送信されません。" }
+  other: { title: "その他",     note: "入力した値やファイルは端末の中だけで処理され、外部に送信されません。" }
 };
 
 const tools = [
@@ -267,6 +267,14 @@ const tools = [
     std: ["Ghostscript", "上限サイズ指定", "一括・ZIP"],
     open: "https://kotaooka.github.io/PDFComp/",
     repo: "https://github.com/kotaooka/PDFComp"
+  },
+  {
+    section: "other", fig: "tri",
+    name: "三角形計算機",
+    desc: "辺の長さ・角度から一般三角形と直角三角形を解き、面積・高さ・外接円まで。勾配・テーパーの換算、座標からの距離と角度も。図の頂点をドラッグして形を変えられる。",
+    std: ["正弦・余弦定理", "勾配 / テーパー", "度分秒"],
+    open: "https://kotaooka.github.io/triangle-calc/",
+    repo: "https://github.com/kotaooka/triangle-calc"
   }
 ];
 
@@ -390,6 +398,15 @@ const figs = {
       <text x="${x + 11}" y="${y + 28}" text-anchor="middle" font-size="10" font-weight="700" font-family="var(--f-num)" fill="currentColor">PDF</text>
       <path d="M${x + 7} ${y + 8}H${x + 24}M${x + 7} ${y + 13}H${x + 30}" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/>
       ${arrow(y - 3, 1)}${arrow(y + h + 3, -1)}`;
+  },
+  // 三角形：方眼の上の三角形と角の弧
+  tri() {
+    const A = [58, 14], B = [26, 74], C = [106, 74];
+    const r = 14, a1 = Math.atan2(A[1] - B[1], A[0] - B[0]);
+    const arc = `M${B[0] + r} ${B[1]}A${r} ${r} 0 0 0 ${(B[0] + r * Math.cos(a1)).toFixed(1)} ${(B[1] + r * Math.sin(a1)).toFixed(1)}`;
+    return `<path d="M${A}L${B}L${C}Z" fill="var(--fig-weak)" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      <path d="${arc}" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      ${[A, B, C].map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="var(--panel)" stroke="currentColor" stroke-width="1.5"/>`).join("")}`;
   },
   // 幾何公差：位置度の公差記入枠（⌖ | ⌀0.1 Ⓜ | A | B）
   fcf() {
