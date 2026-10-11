@@ -1,6 +1,6 @@
 # QC Workbench
 
-品質管理の計算ツールと問題集の入口ページ。公開先は https://kotaooka.github.io/ 。
+品質管理の計算ツールと問題集（と書類の PDF 圧縮）の入口ページ。公開先は https://kotaooka.github.io/ 。
 
 | ツール | 公開ページ | リポジトリ |
 |---|---|---|
@@ -13,6 +13,7 @@
 | 色差累積ビューア | https://kotaooka.github.io/deltae-calc/ | [deltae-calc](https://github.com/kotaooka/deltae-calc) |
 | QC2級ドリル | https://kotaooka.github.io/qc2-drill/ | [qc2-drill](https://github.com/kotaooka/qc2-drill) |
 | 幾何公差ドリル | https://kotaooka.github.io/gdt-drill/ | [gdt-drill](https://github.com/kotaooka/gdt-drill) |
+| PDF圧縮 | https://kotaooka.github.io/PDFComp/ | [PDFComp](https://github.com/kotaooka/PDFComp) |
 
 ## ファイル
 

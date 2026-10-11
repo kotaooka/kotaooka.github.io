@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>QC Workbench｜品質管理の計算ツールと問題集</title>
-<meta name="description" content="工程能力・測定システム解析・2値データの要因解析・実験計画法・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。">
+<meta name="description" content="工程能力・測定システム解析・2値データの要因解析・実験計画法・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。書類の PDF 圧縮も。">
 <meta name="theme-color" content="#1D5C7A">
 <meta property="og:title" content="QC Workbench｜品質管理の計算ツールと問題集">
-<meta property="og:description" content="工程能力・測定システム解析・2値データの要因解析・実験計画法・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。">
+<meta property="og:description" content="工程能力・測定システム解析・2値データの要因解析・実験計画法・抜取検査・公差積み上げ・色差の計算ツールと、QC検定2級・幾何公差の問題集。書類の PDF 圧縮も。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kotaooka.github.io/">
 <meta property="og:site_name" content="QC Workbench">
@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://kotaooka.github.io/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="QC Workbench：工程能力解析・測定システム解析・2値データの要因解析・抜取検査計算機・公差積み上げ計算・色差累積ビューア・QC2級ドリル・幾何公差ドリル">
+<meta property="og:image:alt" content="QC Workbench：工程能力解析・測定システム解析・2値データの要因解析・抜取検査計算機・公差積み上げ計算・色差累積ビューア・QC2級ドリル・幾何公差ドリル・PDF圧縮">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://kotaooka.github.io/">
 <!-- ファビコン（外部ファイル不要のインラインSVG） -->
@@ -181,7 +181,8 @@
 // std     : 準拠規格・主な手法（短く）
 const groups = {
   calc:  { title: "計算ツール", note: "入力したデータは端末の中だけで処理され、外部に送信されません。" },
-  drill: { title: "問題集",     note: "計算問題は毎回数値が変わります。間隔反復による復習つき。" }
+  drill: { title: "問題集",     note: "計算問題は毎回数値が変わります。間隔反復による復習つき。" },
+  file:  { title: "書類",       note: "ファイルは端末の中だけで処理され、外部に送信されません。" }
 };
 
 const tools = [
@@ -258,6 +259,14 @@ const tools = [
     open: "https://kotaooka.github.io/gdt-drill/",
     repo: "https://github.com/kotaooka/gdt-drill",
     android: "https://github.com/kotaooka/gdt-drill/releases/latest"
+  },
+  {
+    section: "file", fig: "pdf",
+    name: "PDF圧縮",
+    desc: "検査成績書のスキャンや写真入りの報告書を、添付できる大きさに縮める。強さを選ぶか、1 ファイルの上限を決めて画質を自動で選ぶ。圧縮前後のページを並べて画質を確認。",
+    std: ["Ghostscript", "上限サイズ指定", "一括・ZIP"],
+    open: "https://kotaooka.github.io/PDFComp/",
+    repo: "https://github.com/kotaooka/PDFComp"
   }
 ];
 
@@ -367,6 +376,20 @@ const figs = {
       <line x1="8" y1="74" x2="124" y2="74" stroke="currentColor" stroke-dasharray="4 3" stroke-opacity=".7"/>
       <path d="${path(pts)}" fill="none" stroke="currentColor" stroke-width="1.5"/>
       ${pts.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="2.6" fill="var(--panel)" stroke="currentColor" stroke-width="1.5"/>`).join("")}`;
+  },
+  // PDF圧縮：上下から押し縮められる書類
+  pdf() {
+    const x = 44, y = 26, w = 44, h = 36, f = 10;
+    const arrow = (tip, dir) => {
+      const b = tip - dir * 9;
+      return `<path d="M66 ${tip}L59 ${b}H73Z" fill="currentColor"/><path d="M66 ${b}V${b - dir * 8}" stroke="currentColor" stroke-width="3"/>`;
+    };
+    return `<path d="M${x} ${y}H${x + w - f}L${x + w} ${y + f}V${y + h}H${x}Z" fill="var(--panel)" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M${x + w - f} ${y}V${y + f}H${x + w}" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <rect x="${x - 6}" y="${y + 18}" width="34" height="13" rx="2" fill="var(--fig-weak)" stroke="currentColor" stroke-width="1.2"/>
+      <text x="${x + 11}" y="${y + 28}" text-anchor="middle" font-size="10" font-weight="700" font-family="var(--f-num)" fill="currentColor">PDF</text>
+      <path d="M${x + 7} ${y + 8}H${x + 24}M${x + 7} ${y + 13}H${x + 30}" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/>
+      ${arrow(y - 3, 1)}${arrow(y + h + 3, -1)}`;
   },
   // 幾何公差：位置度の公差記入枠（⌖ | ⌀0.1 Ⓜ | A | B）
   fcf() {
