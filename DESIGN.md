@@ -53,8 +53,13 @@ QC Workbench（このサイト）と、そこに載せるツールの見た目�
 |---|---|---|---|---|
 | 三角形計算機 | `--calc` / `--calc-weak` | `#b4441f` / `#f6e3db` | `#f0a07a` / `#3d2a22` | 計算で出した値（入れた値は `--ink`） |
 | 色差累積ビューア | `--c1`〜`--c5`、`--q1`〜`--q4` | （ツール内を参照） | | 試料の色分け、角度の色分け |
-| QC2級ドリル | `--accent` | `#1d5c7a` | （ツール内を参照） | アクセント色。UI が同じ 2 つのドリルを色で見分けるため、計算ツールの青系とはわざとそろえない |
-| 幾何公差ドリル | `--accent` | `#3d4a9e` | （ツール内を参照） | 同上 |
+| QC2級ドリル | `--accent` / `--accent-weak` | `#1d5c7a` / `#e2eef3` | `#72b6d6` / `#1b3340` | アクセント色 |
+| QC2級ドリル | `--paper` / `--grid` | `#f3f6f5` / 方眼 | `#10171b` / 方眼 | ページの背景（`--bg` の代わり）と、背景の方眼 |
+| 幾何公差ドリル | `--accent` / `--accent-weak` | `#3d4a9e` / `#e6e8f6` | `#9aa6f0` / `#232846` | アクセント色 |
+| 幾何公差ドリル | `--paper` / `--grid` | `#f4f5f9` / 方眼 | `#10121a` / 方眼 | ページの背景（`--bg` の代わり）と、背景の方眼 |
+| 2 つのドリル | `--streak` | `#a86a12` | `#e0a84a` | 連続記録・星・実績の琥珀（要注意の `--warn` とは別） |
+
+2 つのドリルは UI が同じなので、どちらを開いているか見分けられるように、背景色とアクセント色（とそこから作る色）だけをわざと変えている。計算ツールの青系にはそろえない。それ以外の基本色・判定色・字体は上の規則どおり。ドリルでは面を `--card`（= `--surface`）と呼ぶ。
 
 ### 1.5 色以外で合わせるところ
 
@@ -64,12 +69,14 @@ QC Workbench（このサイト）と、そこに載せるツールの見た目�
 - ダークモードは `@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {…} }` と `:root[data-theme="dark"] {…}` の両方に同じ値を書く
 - 表示切替（自動・ライト・ダーク）の保存キーは全ツール共通の `qc-workbench-theme`
 - 色を変えたら `sw.js` の `VERSION` を上げ、README のスクリーンショットを撮り直す
+- 2 つのドリルの例外：`theme-color` のライトはアクセント色、ダークは背景色（`--paper`）。manifest の `theme_color` はアクセント色、`background_color` は背景色。アプリアイコン・ファビコンの地の色はアクセント色
 
 ## 2. 字体
 
 - 画面の文字は `BIZ UDPGothic`（400・700）、数値は `IBM Plex Mono`（500）。Google Fonts から読む
 - `--f-ui: "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;`
 - `--f-num: "IBM Plex Mono", ui-monospace, "Consolas", monospace;`
+- 数値の字体の箇所に和文が混ざるツール（2 つのドリル）は、`"IBM Plex Mono"` の次に `"BIZ UDPGothic"` を入れる
 
 ## 3. 言葉づかい（トンマナ）
 
