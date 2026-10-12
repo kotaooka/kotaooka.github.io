@@ -40,8 +40,8 @@ googlede6a9549483e5636.html    Search Console の所有権確認ファイル（�
 
 ## og.png の作り直し
 
-`python tools/make_og.py [Noto Sans CJK のフォルダ]` で作り直す。ツールを追加したらスクリプト内の `TOOLS` と `SUBTITLE` も直す。
+`python tools/make_og.py [フォントのフォルダ]` で作り直す。ツールを追加したらスクリプト内の `TOOLS` と `SUBTITLE` も直す。
 
-文字は画像に焼き込んでいるので、表示する側のフォントに左右されない。作り直すときは、日本語フォントに Noto Sans CJK **JP** を使う（`.ttc` は日本語・中国語・韓国語の字形を1ファイルに持つので、日本語版を明示して選ぶ。選ばないと「直」「骨」などが中国語の字形になる）。
+文字は画像に焼き込んでいるので、表示する側のフォントに左右されない。字体はサイトと同じ BIZ UDPゴシックを使う。Windows に付いている `BIZ-UDGothicR.ttc`・`BIZ-UDGothicB.ttc` か、Google Fonts の `BIZUDPGothic-Regular.ttf`・`-Bold.ttf` を読む（フォルダを省略すると `C:\Windows\Fonts` と `~/.fonts` を探す）。
 
 SNS は一度読んだ画像をしばらく保持するので、差し替え直後に共有すると古い画像が出ることがある。

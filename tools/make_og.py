@@ -1,16 +1,18 @@
 # SNS 共有用の画像 og.png（1200×630）を作り直す
 #
-# 文字は画像に焼き込むので、日本語フォントは Noto Sans CJK JP を使う。
-# .ttc は日本語・中国語・韓国語の字形を1ファイルに持つため、index=0（JP）を明示して選ぶ。
-# 実行: python tools/make_og.py [Noto Sans CJK のフォルダ]
-#   既定は /usr/share/fonts/opentype/noto（Windows なら NotoSansCJK-*.ttc を置いたフォルダを指定）
+# 文字は画像に焼き込む。字体はサイトと同じ BIZ UDPゴシック（DESIGN.md 2）。
+# 実行: python tools/make_og.py [フォントのフォルダ]
+#   Google Fonts 版（BIZUDPGothic-Regular.ttf / -Bold.ttf）と、Windows 付属版（BIZ-UDGothicR.ttc / B.ttc。
+#   1つのファイルに BIZ UDゴシックと BIZ UDPゴシックが入っている）のどちらでも読める。
+#   フォルダを省略すると C:\Windows\Fonts と ~/.fonts を順に探す
 # TOOLS は代表的なツールだけ載せる（全部は載せない。ツールを増やしても直さなくてよい）
 # 余白は左右を MARGIN にそろえ、上下は中身を画像の上下中央に置いてそろえる
 import math, pathlib, sys
 from PIL import Image, ImageDraw, ImageFont
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
-FONT_DIR = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "/usr/share/fonts/opentype/noto")
+FONT_DIRS = [pathlib.Path(sys.argv[1])] if len(sys.argv) > 1 else [pathlib.Path("C:/Windows/Fonts"), pathlib.Path.home() / ".fonts"]
+FONT_FILES = {"Regular": ["BIZUDPGothic-Regular.ttf", "BIZ-UDGothicR.ttc"], "Bold": ["BIZUDPGothic-Bold.ttf", "BIZ-UDGothicB.ttc"]}
 
 SUBTITLE = ["品質管理の計算ツールと、", "QC検定・幾何公差の問題集"]
 TOOLS = [
@@ -22,13 +24,24 @@ TOP, BOTTOM = (29, 92, 150), (26, 83, 136)  # 計算ツールのアクセント 
 K = 2  # 縮小前の倍率（アンチエイリアス用）
 MARGIN = 72  # 左右の余白（px）
 GAP = 48  # 左の文字と右の図の間の最小の間隔（px）
-FIG_W = 380  # 右の図の幅（px）
+FIG_W = 360  # 右の図の幅（px）
 
 
 def font(weight, size):
-    f = ImageFont.truetype(str(FONT_DIR / f"NotoSansCJK-{weight}.ttc"), size * K, index=0)
-    assert f.getname()[0] == "Noto Sans CJK JP", f.getname()
-    return f
+    # 見つかったファイルの中から、名前が BIZ UDPGothic の字体を選ぶ（.ttc は BIZ UDGothic と同居している）
+    for d in FONT_DIRS:
+        for name in FONT_FILES[weight]:
+            path = d / name
+            if not path.exists():
+                continue
+            for index in range(4):
+                try:
+                    f = ImageFont.truetype(str(path), size * K, index=index)
+                except OSError:
+                    break
+                if f.getname()[0] == "BIZ UDPGothic":
+                    return f
+    sys.exit(f"BIZ UDPGothic（{weight}）が見つからない。フォントのフォルダを引数で指定する")
 
 
 def main():
@@ -43,9 +56,10 @@ def main():
     d = ImageDraw.Draw(left)
     soft = (222, 232, 244)
     d.text((0, 0), "kotaooka.github.io", font=font("Regular", 26), fill=soft)
-    d.text((-2 * K, 48 * K), "QC Workbench", font=font("Bold", 82), fill=(255, 255, 255))
+    # BIZ UDPゴシックは欧文の幅が広いので、図との間隔（GAP）を保てる 74px にする
+    d.text((-2 * K, 50 * K), "QC Workbench", font=font("Bold", 74), fill=(255, 255, 255))
     for i, line in enumerate(SUBTITLE):
-        d.text((0, (160 + i * 46) * K), line, font=font("Regular", 28), fill=soft)
+        d.text((0, (154 + i * 46) * K), line, font=font("Regular", 28), fill=soft)
     pf = font("Regular", 24)
     y = 272 * K
     for row in TOOLS:
