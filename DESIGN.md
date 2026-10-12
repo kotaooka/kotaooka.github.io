@@ -77,6 +77,9 @@ QC Workbench（このサイト）と、そこに載せるツールの見た目�
 - `--f-ui: "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;`
 - `--f-num: "IBM Plex Mono", ui-monospace, "Consolas", monospace;`
 - 数値の字体の箇所に和文が混ざるツール（2 つのドリル）は、`"IBM Plex Mono"` の次に `"BIZ UDPGothic"` を入れる
+- Google Fonts から読むので、README の「データは外に出ません」の近くに「画面の字体は Google Fonts から読み込むため、開いたときに Google のサーバーへ接続します。入力したデータは送りません」と書く
+- `sw.js` では Google Fonts の応答を `<リポジトリ名>-fonts` のキャッシュに保存し、通信がなくても同じ字体で表示する
+- 全ツールが同じサイト（kotaooka.github.io）にあり、キャッシュの置き場所を共有している。`sw.js` で古いキャッシュを消すときは、名前が `<リポジトリ名>-` で始まるものだけにする（ほかのツールのオフライン用キャッシュを消さないため）
 
 ## 3. 言葉づかい（トンマナ）
 
