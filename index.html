@@ -285,6 +285,14 @@ const tools = [
     repo: "https://github.com/kotaooka/stackup-calc"
   },
   {
+    section: "calc", fig: "clamp",
+    name: "トグルクランプ締圧力計算機",
+    desc: "下方押え型トグルクランプのリンク寸法から、ハンドル角ごとの締圧力とハンドル操作力を計算。死点越えのロック時の締圧力、スピンドル位置に合わせたカタログ値の換算にも対応",
+    std: ["4節リンク", "仮想仕事", "死点越え"],
+    open: "https://kotaooka.github.io/clamp-calc/",
+    repo: "https://github.com/kotaooka/clamp-calc"
+  },
+  {
     section: "calc", fig: "lab",
     name: "色差累積ビューア",
     desc: "試料A → B → C … と色を引き継いだときの各段と累積の色差、ずれの向き、許容差の余裕を図示。2色の中間色も計算。5角度とフロップインデックスにも対応",
@@ -448,6 +456,18 @@ const figs = {
       <text x="${x + 11}" y="${y + 28}" text-anchor="middle" font-size="10" font-weight="700" font-family="var(--f-num)" fill="currentColor">PDF</text>
       <path d="M${x + 7} ${y + 8}H${x + 24}M${x + 7} ${y + 13}H${x + 30}" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/>
       ${arrow(y - 3, 1)}${arrow(y + h + 3, -1)}`;
+  },
+  // トグルクランプ：台座・押えアーム・ハンドル・リンクと、ワークを押す矢印
+  clamp() {
+    const A = [58, 62], B = [50, 44], C = [38, 54], D = [24, 66], S = [104, 62], Hd = [54, 8];
+    const pv = p => `<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="var(--panel)" stroke="currentColor" stroke-width="1.5"/>`;
+    return `<path d="M14 78H70L62 60H22Z" fill="var(--fig-weak)"/><rect x="90" y="66" width="30" height="12" fill="var(--fig-weak)" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M8 78H124" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M${C}L${D}" stroke="currentColor" stroke-width="2"/>
+      <path d="M${B}L${A}L${S}" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M${C}L${B}L${Hd}" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M104 30V48" stroke="currentColor" stroke-width="2"/><path d="M99 46L104 55L109 46Z" fill="currentColor"/>
+      ${[A, B, C, D].map(pv).join("")}`;
   },
   // 三角形：方眼の上の三角形と角の弧
   tri() {

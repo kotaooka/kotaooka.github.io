@@ -10,6 +10,7 @@
 | 実験計画法 | https://kotaooka.github.io/doe-calc/ | [doe-calc](https://github.com/kotaooka/doe-calc) |
 | 抜取検査計算機 | https://kotaooka.github.io/sampling-calc/ | [sampling-calc](https://github.com/kotaooka/sampling-calc) |
 | 公差積み上げ計算 | https://kotaooka.github.io/stackup-calc/ | [stackup-calc](https://github.com/kotaooka/stackup-calc) |
+| トグルクランプ締圧力計算機 | https://kotaooka.github.io/clamp-calc/ | [clamp-calc](https://github.com/kotaooka/clamp-calc) |
 | 色差累積ビューア | https://kotaooka.github.io/deltae-calc/ | [deltae-calc](https://github.com/kotaooka/deltae-calc) |
 | QC2級ドリル | https://kotaooka.github.io/qc2-drill/ | [qc2-drill](https://github.com/kotaooka/qc2-drill) |
 | 幾何公差ドリル | https://kotaooka.github.io/gdt-drill/ | [gdt-drill](https://github.com/kotaooka/gdt-drill) |
