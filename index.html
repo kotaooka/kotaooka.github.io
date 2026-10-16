@@ -109,6 +109,8 @@
   h1 { display: flex; align-items: center; gap: 12px; font-size: 2.1rem; line-height: 1.2; margin: 0 0 10px; letter-spacing: .01em; }
   h1 svg { flex: none; width: 40px; height: 40px; }
   .lead { margin: 0; color: var(--ink2); font-size: 1rem; }
+  /* 見出しの下の一文に続く、サイトの成り立ちの補足（説明文より一段控えめ） */
+  .about { margin: 2px 0 0; color: var(--muted); font-size: .88rem; }
   /* 端末内で処理する旨（DESIGN.md 1.2 の --ok）。色だけに頼らず記号と文で示す */
   .local {
     display: inline-flex; align-items: baseline; gap: 6px; margin: 14px 0 0; padding: 4px 12px;
@@ -210,6 +212,7 @@
       <button class="theme" id="themeBtn" type="button" aria-label="表示テーマを切り替え">表示：自動</button>
     </div>
     <p class="lead">品質管理のための計算ツールと、QC検定・幾何公差の問題集</p>
+    <p class="about">自分自身が使いたいツールや教材を少しずつWebアプリ化しています</p>
     <p class="local"><span aria-hidden="true">✓</span>入力したデータやファイルは端末の中だけで処理され、外部に送信されません</p>
     <ul class="toc" id="toc"></ul>
   </header>
