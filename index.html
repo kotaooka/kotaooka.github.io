@@ -235,7 +235,8 @@
 const groups = {
   calc:  { title: "計算ツール" },
   drill: { title: "問題集",     note: "計算問題は毎回数値が変わります。間隔反復による復習つき" },
-  other: { title: "その他" }
+  other: { title: "その他" },
+  break: { title: "コーヒーブレイク" }
 };
 
 const tools = [
@@ -344,6 +345,14 @@ const tools = [
     std: ["正弦・余弦定理", "勾配 / テーパー", "度分秒"],
     open: "https://kotaooka.github.io/triangle-calc/",
     repo: "https://github.com/kotaooka/triangle-calc"
+  },
+  {
+    section: "break", fig: "cat",
+    name: "こっそりネコ",
+    desc: "ネコを操作して、飼い主に見つからないようにテーブルのコップを全部落とす。飼い主の「？」の予告と「!!」の監視に合わせて、動くか止まるかを選ぶ。ステージが進むとコップが増え、飼い主の離席と予告が短くなる",
+    std: ["ブラウザゲーム", "キー / タッチ操作"],
+    open: "https://kotaooka.github.io/mischievous-cat/",
+    repo: "https://github.com/kotaooka/mischievous-cat"
   }
 ];
 
@@ -514,6 +523,23 @@ const figs = {
     const t = (tx, str) => `<text x="${x + tx}" y="${y + 18.5}" text-anchor="middle" font-size="12" font-family="var(--f-num)" fill="currentColor">${str}</text>`;
     s += t(57, "⌀0.1 Ⓜ") + t(96, "A") + t(116, "B");
     return s;
+  },
+  // コーヒーブレイク：テーブルの上でコップを押すネコと、落ちていくコップ
+  cat() {
+    const cup = (x, y, r) => `<g transform="translate(${x} ${y}) rotate(${r})">
+      <path d="M-6 -14H6L4.5 0H-4.5Z" fill="var(--panel)" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M6 -11C11 -11 11 -4 5.2 -4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    </g>`;
+    return `<line x1="4" y1="84" x2="128" y2="84" stroke="currentColor" stroke-opacity=".4"/>
+      <path d="M10 58H92M18 58V84M84 58V84" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M22 56C12 56 10 42 16 34" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="34" cy="48" rx="14" ry="9" fill="var(--fig-weak)" stroke="currentColor" stroke-width="2"/>
+      <circle cx="50" cy="38" r="8" fill="var(--fig-weak)" stroke="currentColor" stroke-width="2"/>
+      <path d="M44 33L45 25L50 31M51 31L56 25L57 34" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M50 50L67 50" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+      ${cup(74, 58, 0)}
+      <path d="M80 44Q98 40 104 58" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3" stroke-opacity=".7"/>
+      ${cup(106, 74, 50)}`;
   }
 };
 

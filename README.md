@@ -17,6 +17,7 @@
 | 幾何公差ドリル | https://kotaooka.github.io/gdt-drill/ | [gdt-drill](https://github.com/kotaooka/gdt-drill) |
 | PDF圧縮 | https://kotaooka.github.io/PDFComp/ | [PDFComp](https://github.com/kotaooka/PDFComp) |
 | 三角形計算機 | https://kotaooka.github.io/triangle-calc/ | [triangle-calc](https://github.com/kotaooka/triangle-calc) |
+| こっそりネコ | https://kotaooka.github.io/mischievous-cat/ | [mischievous-cat](https://github.com/kotaooka/mischievous-cat) |
 
 ## ファイル
 
