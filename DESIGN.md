@@ -120,5 +120,5 @@ QC Workbench（このサイト）と、そこに載せるツールの見た目�
 - リンク先は `https://buymeacoffee.com/kotaooka`。`target="_blank" rel="noopener"` で開き、入力中の内容を失わないようにする
 - Buy Me a Coffee の公式ウィジェット（外部の JS や画像）は読み込まない。「入力したデータは外に出ません」の説明と食い違うため
 - 印刷・PDF 出力では `@media print` で隠す
-- GitHub の Sponsor ボタンは `kotaooka/.github` の `FUNDING.yml` で全リポジトリにまとめて出す。各 README には支援リンクを書かない
+- GitHub の Sponsor ボタンは、各リポジトリの `.github/FUNDING.yml`（`buy_me_a_coffee: kotaooka`）で出す。新しいリポジトリを作ったら同じファイルを置く。各 README には支援リンクを書かない
 - こっそりネコ（ゲーム）はこの規則の対象外。プレイ中は出さず、結果の画面に「☕ コーヒーをおごる」を置く
