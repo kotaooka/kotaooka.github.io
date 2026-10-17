@@ -186,6 +186,8 @@
 
   footer { margin: 48px 0 36px; color: var(--muted); font-size: .8rem; }
   footer a { color: inherit; }
+  footer .sep { margin: 0 .6em; }
+  @media print { .support { display: none; } }
 
   /* スマホ幅：図を小さくし、サブのリンクを本文の下に回す */
   @media (max-width: 600px) {
@@ -220,7 +222,7 @@
   <main id="app"></main>
 
   <footer>
-    <a href="https://github.com/kotaooka">GitHub: kotaooka</a>
+    <a href="https://github.com/kotaooka">GitHub: kotaooka</a><span class="sep support" aria-hidden="true">·</span><a class="support" href="https://buymeacoffee.com/kotaooka" target="_blank" rel="noopener"><span aria-hidden="true">☕</span> 開発を応援する（Buy Me a Coffee）</a>
   </footer>
 </div>
 
