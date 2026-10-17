@@ -11,6 +11,7 @@
 | 抜取検査計算機 | https://kotaooka.github.io/sampling-calc/ | [sampling-calc](https://github.com/kotaooka/sampling-calc) |
 | 公差積み上げ計算 | https://kotaooka.github.io/stackup-calc/ | [stackup-calc](https://github.com/kotaooka/stackup-calc) |
 | はめあい・ねじ公差計算機 | https://kotaooka.github.io/fit-calc/ | [fit-calc](https://github.com/kotaooka/fit-calc) |
+| 普通公差計算機 | https://kotaooka.github.io/gentol-calc/ | [gentol-calc](https://github.com/kotaooka/gentol-calc) |
 | トグルクランプ締圧力計算機 | https://kotaooka.github.io/clamp-calc/ | [clamp-calc](https://github.com/kotaooka/clamp-calc) |
 | 色差累積ビューア | https://kotaooka.github.io/deltae-calc/ | [deltae-calc](https://github.com/kotaooka/deltae-calc) |
 | QC2級ドリル | https://kotaooka.github.io/qc2-drill/ | [qc2-drill](https://github.com/kotaooka/qc2-drill) |
