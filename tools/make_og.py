@@ -15,9 +15,10 @@ FONT_DIRS = [pathlib.Path(sys.argv[1])] if len(sys.argv) > 1 else [pathlib.Path(
 FONT_FILES = {"Regular": ["BIZUDPGothic-Regular.ttf", "BIZ-UDGothicR.ttc"], "Bold": ["BIZUDPGothic-Bold.ttf", "BIZ-UDGothicB.ttc"]}
 
 SUBTITLE = ["品質管理の計算ツールと、", "QC検定・幾何公差の問題集"]
+# 1行目＝データ解析、2行目＝工学計算、3行目＝問題集（ポータルのグループ順）
 TOOLS = [
-    ["工程能力解析", "測定システム解析", "実験計画法"],
-    ["抜取検査計算機", "公差積み上げ計算"],
+    ["測定システム解析", "工程能力解析", "実験計画法"],
+    ["公差積み上げ計算", "はめあい・ねじ公差計算機"],
     ["QC2級ドリル", "幾何公差ドリル"],
 ]
 TOP, BOTTOM = (29, 92, 150), (26, 83, 136)  # 計算ツールのアクセント #1d5c96 から少し暗く
