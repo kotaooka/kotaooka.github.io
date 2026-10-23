@@ -20,6 +20,7 @@
 | PDF圧縮 | https://kotaooka.github.io/PDFComp/ | [PDFComp](https://github.com/kotaooka/PDFComp) |
 | 三角形計算機 | https://kotaooka.github.io/triangle-calc/ | [triangle-calc](https://github.com/kotaooka/triangle-calc) |
 | こっそりネコ | https://kotaooka.github.io/mischievous-cat/ | [mischievous-cat](https://github.com/kotaooka/mischievous-cat) |
+| 三点照合ゲーム | https://kotaooka.github.io/santen-check/ | [santen-check](https://github.com/kotaooka/santen-check) |
 
 ## ファイル
 
@@ -30,16 +31,20 @@ tools/make_og.py               og.png を作り直すスクリプト（ツール
 sitemap.xml                    検索エンジン向けのページ一覧（各ツールのページを含む）
 robots.txt                     サイト全体のクロール設定と sitemap.xml の場所
 googlede6a9549483e5636.html    Search Console の所有権確認ファイル（消さない）
+LICENSE                        MIT ライセンス
 ```
 
 ## ツールを追加するとき
 
-新しいツールを公開したら、次の4か所を更新する。
+新しいツールを公開したら、次の5か所を更新する。
 
 1. **このリポジトリの `index.html`**：`tools` 配列に1項目を足す（`section`・`fig`・`name`・`desc`・`std`・`open`・`repo`、Android 版があれば `android`）。`fig` は行の左に描く図の名前で、`figs` に同じ名前の関数（viewBox 132×88 の SVG を返す。色は `currentColor`）を足す。グループを増やすときは `groups` にも足す。
 2. **このリポジトリの `sitemap.xml`**：`<url>` を1つ足し、`lastmod` を公開日にする。
-3. **ツール側の OGP**：`<head>` に description、canonical、`og:*`（`og:site_name` は `QC Workbench`）、`twitter:card` を入れ、1200×630 の `og.png` をツールの公開フォルダに置く。`og:image` は絶対 URL で書く。
-4. **ツール側の戻るリンク**：画面上部の見出しの前に `https://kotaooka.github.io/` へのリンク（表示は「QC Workbench ›」）を置く。
+3. **このリポジトリの `README.md`**：冒頭の表に1行足す（ツール名は `index.html` の `name` と同じにする）。
+4. **ツール側の OGP**：`<head>` に description、canonical、`og:*`（`og:site_name` は `QC Workbench`）、`twitter:card` を入れ、1200×630 の `og.png` をツールの公開フォルダに置く。`og:image` は絶対 URL で書く。
+5. **ツール側の戻るリンク**：画面上部の見出しの前に `https://kotaooka.github.io/` へのリンク（表示は「QC Workbench ›」）を置く。
+
+ツール側のリポジトリには `LICENSE` を置く（MIT。GPL 系のライブラリを組み込むときはそのライセンスに合わせる。例：PDFComp は Ghostscript を使うため AGPL-3.0）。
 
 ツールの中身を大きく更新したときは、`sitemap.xml` の該当ページの `lastmod` も更新する。
 
@@ -50,3 +55,7 @@ googlede6a9549483e5636.html    Search Console の所有権確認ファイル（�
 文字は画像に焼き込んでいるので、表示する側のフォントに左右されない。字体はサイトと同じ BIZ UDPゴシックを使う。Windows に付いている `BIZ-UDGothicR.ttc`・`BIZ-UDGothicB.ttc` か、Google Fonts の `BIZUDPGothic-Regular.ttf`・`-Bold.ttf` を読む（フォルダを省略すると `C:\Windows\Fonts` と `~/.fonts` を探す）。
 
 SNS は一度読んだ画像をしばらく保持するので、差し替え直後に共有すると古い画像が出ることがある。
+
+## ライセンス
+
+[MIT](LICENSE)
