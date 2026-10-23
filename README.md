@@ -2,25 +2,28 @@
 
 品質管理の計算ツールと問題集（と書類の PDF 圧縮）の入口ページ。公開先は https://kotaooka.github.io/ 。
 
-| ツール | 公開ページ | リポジトリ |
-|---|---|---|
-| 工程能力解析 | https://kotaooka.github.io/cpk-calc/ | [cpk-calc](https://github.com/kotaooka/cpk-calc) |
-| 測定システム解析 | https://kotaooka.github.io/msa-calc/ | [msa-calc](https://github.com/kotaooka/msa-calc) |
-| 2値データの要因解析 | https://kotaooka.github.io/logit-calc/ | [logit-calc](https://github.com/kotaooka/logit-calc) |
-| 実験計画法 | https://kotaooka.github.io/doe-calc/ | [doe-calc](https://github.com/kotaooka/doe-calc) |
-| 抜取検査計算機 | https://kotaooka.github.io/sampling-calc/ | [sampling-calc](https://github.com/kotaooka/sampling-calc) |
-| 公差積み上げ計算 | https://kotaooka.github.io/stackup-calc/ | [stackup-calc](https://github.com/kotaooka/stackup-calc) |
-| はめあい・ねじ公差計算機 | https://kotaooka.github.io/fit-calc/ | [fit-calc](https://github.com/kotaooka/fit-calc) |
-| 締付けトルク計算機 | https://kotaooka.github.io/torque-calc/ | [torque-calc](https://github.com/kotaooka/torque-calc) |
-| 普通公差計算機 | https://kotaooka.github.io/gentol-calc/ | [gentol-calc](https://github.com/kotaooka/gentol-calc) |
-| トグルクランプ締圧力計算機 | https://kotaooka.github.io/clamp-calc/ | [clamp-calc](https://github.com/kotaooka/clamp-calc) |
-| 色差累積ビューア | https://kotaooka.github.io/deltae-calc/ | [deltae-calc](https://github.com/kotaooka/deltae-calc) |
-| QC2級ドリル | https://kotaooka.github.io/qc2-drill/ | [qc2-drill](https://github.com/kotaooka/qc2-drill) |
-| 幾何公差ドリル | https://kotaooka.github.io/gdt-drill/ | [gdt-drill](https://github.com/kotaooka/gdt-drill) |
-| PDF圧縮 | https://kotaooka.github.io/PDFComp/ | [PDFComp](https://github.com/kotaooka/PDFComp) |
-| 三角形計算機 | https://kotaooka.github.io/triangle-calc/ | [triangle-calc](https://github.com/kotaooka/triangle-calc) |
-| こっそりネコ | https://kotaooka.github.io/mischievous-cat/ | [mischievous-cat](https://github.com/kotaooka/mischievous-cat) |
-| 三点照合ゲーム | https://kotaooka.github.io/santen-check/ | [santen-check](https://github.com/kotaooka/santen-check) |
+<!-- このツール表は tools/make_readme.py が index.html から作る。手で直さない -->
+<!-- tools:start -->
+| 区分 | ツール | 公開ページ | リポジトリ |
+|---|---|---|---|
+| データ解析（統計） | 測定システム解析 | https://kotaooka.github.io/msa-calc/ | [msa-calc](https://github.com/kotaooka/msa-calc) |
+| データ解析（統計） | 工程能力解析 | https://kotaooka.github.io/cpk-calc/ | [cpk-calc](https://github.com/kotaooka/cpk-calc) |
+| データ解析（統計） | 抜取検査計算機 | https://kotaooka.github.io/sampling-calc/ | [sampling-calc](https://github.com/kotaooka/sampling-calc) |
+| データ解析（統計） | 2値データの要因解析 | https://kotaooka.github.io/logit-calc/ | [logit-calc](https://github.com/kotaooka/logit-calc) |
+| データ解析（統計） | 実験計画法 | https://kotaooka.github.io/doe-calc/ | [doe-calc](https://github.com/kotaooka/doe-calc) |
+| 工学計算（寸法・機構・色） | 公差積み上げ計算 | https://kotaooka.github.io/stackup-calc/ | [stackup-calc](https://github.com/kotaooka/stackup-calc) |
+| 工学計算（寸法・機構・色） | はめあい・ねじ公差計算機 | https://kotaooka.github.io/fit-calc/ | [fit-calc](https://github.com/kotaooka/fit-calc) |
+| 工学計算（寸法・機構・色） | 締付けトルク計算機 | https://kotaooka.github.io/torque-calc/ | [torque-calc](https://github.com/kotaooka/torque-calc) |
+| 工学計算（寸法・機構・色） | 普通公差計算機 | https://kotaooka.github.io/gentol-calc/ | [gentol-calc](https://github.com/kotaooka/gentol-calc) |
+| 工学計算（寸法・機構・色） | 三角形計算機 | https://kotaooka.github.io/triangle-calc/ | [triangle-calc](https://github.com/kotaooka/triangle-calc) |
+| 工学計算（寸法・機構・色） | トグルクランプ締圧力計算機 | https://kotaooka.github.io/clamp-calc/ | [clamp-calc](https://github.com/kotaooka/clamp-calc) |
+| 工学計算（寸法・機構・色） | 色差累積ビューア | https://kotaooka.github.io/deltae-calc/ | [deltae-calc](https://github.com/kotaooka/deltae-calc) |
+| 問題集 | QC2級ドリル | https://kotaooka.github.io/qc2-drill/ | [qc2-drill](https://github.com/kotaooka/qc2-drill) |
+| 問題集 | 幾何公差ドリル | https://kotaooka.github.io/gdt-drill/ | [gdt-drill](https://github.com/kotaooka/gdt-drill) |
+| ユーティリティ | PDF圧縮 | https://kotaooka.github.io/PDFComp/ | [PDFComp](https://github.com/kotaooka/PDFComp) |
+| コーヒーブレイク | こっそりネコ | https://kotaooka.github.io/mischievous-cat/ | [mischievous-cat](https://github.com/kotaooka/mischievous-cat) |
+| コーヒーブレイク | 三点照合ゲーム | https://kotaooka.github.io/santen-check/ | [santen-check](https://github.com/kotaooka/santen-check) |
+<!-- tools:end -->
 
 ## ファイル
 
@@ -28,6 +31,8 @@
 index.html                     入口ページ（ツール一覧は中の tools 配列）
 og.png                         SNS 共有用の画像（1200×630）。tools/make_og.py で作り直せる
 tools/make_og.py               og.png を作り直すスクリプト（ツール名の一覧はスクリプト内の TOOLS）
+tools/make_readme.py           README のツール表を index.html の tools 配列から作り直すスクリプト
+.github/workflows/readme.yml   push 時に make_readme.py を実行し、表が変わればコミットする
 sitemap.xml                    検索エンジン向けのページ一覧（各ツールのページを含む）
 robots.txt                     サイト全体のクロール設定と sitemap.xml の場所
 googlede6a9549483e5636.html    Search Console の所有権確認ファイル（消さない）
@@ -36,15 +41,16 @@ LICENSE                        MIT ライセンス
 
 ## ツールを追加するとき
 
-新しいツールを公開したら、次の5か所を更新する。
+新しいツールを公開したら、次の4か所を更新する。README のツール表は `index.html` から自動で作られるので、手で直さない。
 
 1. **このリポジトリの `index.html`**：`tools` 配列に1項目を足す（`section`・`fig`・`name`・`desc`・`std`・`open`・`repo`、Android 版があれば `android`）。`fig` は行の左に描く図の名前で、`figs` に同じ名前の関数（viewBox 132×88 の SVG を返す。色は `currentColor`）を足す。グループを増やすときは `groups` にも足す。
 2. **このリポジトリの `sitemap.xml`**：`<url>` を1つ足し、`lastmod` を公開日にする。
-3. **このリポジトリの `README.md`**：冒頭の表に1行足す（ツール名は `index.html` の `name` と同じにする）。
-4. **ツール側の OGP**：`<head>` に description、canonical、`og:*`（`og:site_name` は `QC Workbench`）、`twitter:card` を入れ、1200×630 の `og.png` をツールの公開フォルダに置く。`og:image` は絶対 URL で書く。
-5. **ツール側の戻るリンク**：画面上部の見出しの前に `https://kotaooka.github.io/` へのリンク（表示は「QC Workbench ›」）を置く。
+3. **ツール側の OGP**：`<head>` に description、canonical、`og:*`（`og:site_name` は `QC Workbench`）、`twitter:card` を入れ、1200×630 の `og.png` をツールの公開フォルダに置く。`og:image` は絶対 URL で書く。
+4. **ツール側の戻るリンク**：画面上部の見出しの前に `https://kotaooka.github.io/` へのリンク（表示は「QC Workbench ›」）を置く。
 
 ツール側のリポジトリには `LICENSE` を置く（MIT。GPL 系のライブラリを組み込むときはそのライセンスに合わせる。例：PDFComp は Ghostscript を使うため AGPL-3.0）。
+
+README のツール表は、`main` に push すると GitHub Actions（`.github/workflows/readme.yml`）が `python tools/make_readme.py` を実行し、変わっていればコミットする。手元で先に作り直してもよい（`python tools/make_readme.py`、確認だけなら `--check`）。表の並びは `groups` の順、区分の中は `tools` 配列の順。
 
 ツールの中身を大きく更新したときは、`sitemap.xml` の該当ページの `lastmod` も更新する。
 

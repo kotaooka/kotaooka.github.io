@@ -1,0 +1,38 @@
+# index.html の tools 配列から README.md のツール表を作り直し、変わっていればコミットする
+# GITHUB_TOKEN による push は次のワークフローを起動しないので、繰り返し実行にはならない
+name: readme
+on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - README.md
+      - tools/make_readme.py
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: readme
+  cancel-in-progress: false
+jobs:
+  readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: ツール表を作り直す
+        run: python tools/make_readme.py
+      - name: 変わっていればコミットする
+        run: |
+          if git diff --quiet README.md; then
+            echo "README.md は最新です"
+            exit 0
+          fi
+          # 作者は本人の noreply アドレスにする（bot をコントリビューターに出さない）
+          git config user.name "kotaooka"
+          git config user.email "115392256+kotaooka@users.noreply.github.com"
+          git add README.md
+          git commit -m "README のツール表を index.html から作り直す"
+          git push
