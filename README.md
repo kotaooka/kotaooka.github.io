@@ -21,9 +21,6 @@
 | 問題集 | QC2級ドリル | https://kotaooka.github.io/qc2-drill/ | [qc2-drill](https://github.com/kotaooka/qc2-drill) |
 | 問題集 | 幾何公差ドリル | https://kotaooka.github.io/gdt-drill/ | [gdt-drill](https://github.com/kotaooka/gdt-drill) |
 | ユーティリティ | PDF圧縮 | https://kotaooka.github.io/PDFComp/ | [PDFComp](https://github.com/kotaooka/PDFComp) |
-| コーヒーブレイク | こっそりネコ | https://kotaooka.github.io/mischievous-cat/ | [mischievous-cat](https://github.com/kotaooka/mischievous-cat) |
-| コーヒーブレイク | 三点照合ゲーム | https://kotaooka.github.io/santen-check/ | [santen-check](https://github.com/kotaooka/santen-check) |
-| コーヒーブレイク | 地方競馬データ収集 | https://github.com/kotaooka/keiba-scraper#readme | [keiba-scraper](https://github.com/kotaooka/keiba-scraper) |
 <!-- tools:end -->
 
 ## ファイル
