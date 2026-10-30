@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>QC Workbench｜品質管理の計算ツールと問題集</title>
-<meta name="description" content="測定システム解析・工程能力・抜取検査・2値データの要因解析・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。書類の PDF 圧縮も。">
+<meta name="description" content="測定システム解析・工程能力・抜取検査・2値データの要因解析・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。書類の PDF 圧縮と自動車ローンの返済計算も。">
 <meta name="theme-color" content="#1d5c96" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#11161b" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="QC Workbench｜品質管理の計算ツールと問題集">
-<meta property="og:description" content="測定システム解析・工程能力・抜取検査・2値データの要因解析・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。書類の PDF 圧縮も。">
+<meta property="og:description" content="測定システム解析・工程能力・抜取検査・2値データの要因解析・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。書類の PDF 圧縮と自動車ローンの返済計算も。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kotaooka.github.io/">
 <meta property="og:site_name" content="QC Workbench">
@@ -364,6 +364,14 @@ const tools = [
     std: ["Ghostscript", "上限サイズ指定", "一括 / ZIP"],
     open: "https://kotaooka.github.io/PDFComp/",
     repo: "https://github.com/kotaooka/PDFComp"
+  },
+  {
+    section: "util", fig: "loan",
+    name: "自動車ローン計算機",
+    desc: "月々の支払額と利息の合計を計算。残価設定・ボーナス併用、繰上げ返済（期間短縮・返済額軽減）、変動金利の上昇を比較。銀行・ディーラーの金利の例にも対応",
+    std: ["元利均等 / 元金均等", "残価設定", "繰上げ返済"],
+    open: "https://kotaooka.github.io/car-loan-calc/",
+    repo: "https://github.com/kotaooka/car-loan-calc"
   }
 ];
 
@@ -475,6 +483,18 @@ const figs = {
       ${pts.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="2.6" fill="var(--panel)" stroke="currentColor" stroke-width="1.5"/>`).join("")}`;
   },
   // PDF圧縮：上下から押し縮められる書類
+  // 自動車ローン：回ごとに減る残高の棒と、最後に据え置く残価の棒
+  loan() {
+    const base = 74, x0 = 22, bw = 9, gap = 3, n = 7;
+    let bars = "";
+    for (let i = 0; i < n; i++) {
+      const h = 50 * (1 - i / n * 0.55);
+      bars += `<rect x="${x0 + i * (bw + gap)}" y="${(base - h).toFixed(1)}" width="${bw}" height="${h.toFixed(1)}" fill="var(--fig-weak)" stroke="currentColor" stroke-width="1.2"/>`;
+    }
+    const xl = x0 + n * (bw + gap) + 4, hl = 26;
+    return `<path d="M14 ${base}H118" stroke="currentColor" stroke-width="1.5"/>${bars}
+      <rect x="${xl}" y="${base - hl}" width="${bw + 4}" height="${hl}" fill="currentColor"/>`;
+  },
   pdf() {
     const x = 44, y = 26, w = 44, h = 36, f = 10;
     const arrow = (tip, dir) => {
