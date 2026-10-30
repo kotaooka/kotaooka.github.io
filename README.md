@@ -21,6 +21,7 @@
 | 問題集 | QC2級ドリル | https://kotaooka.github.io/qc2-drill/ | [qc2-drill](https://github.com/kotaooka/qc2-drill) |
 | 問題集 | 幾何公差ドリル | https://kotaooka.github.io/gdt-drill/ | [gdt-drill](https://github.com/kotaooka/gdt-drill) |
 | ユーティリティ | PDF圧縮 | https://kotaooka.github.io/PDFComp/ | [PDFComp](https://github.com/kotaooka/PDFComp) |
+| ユーティリティ | 自動車ローン計算機 | https://kotaooka.github.io/car-loan-calc/ | [car-loan-calc](https://github.com/kotaooka/car-loan-calc) |
 <!-- tools:end -->
 
 ## ファイル
