@@ -9,7 +9,7 @@
 | データ解析（統計） | 測定システム解析 | https://kotaooka.github.io/msa-calc/ | [msa-calc](https://github.com/kotaooka/msa-calc) |
 | データ解析（統計） | 工程能力解析 | https://kotaooka.github.io/cpk-calc/ | [cpk-calc](https://github.com/kotaooka/cpk-calc) |
 | データ解析（統計） | 抜取検査計算機 | https://kotaooka.github.io/sampling-calc/ | [sampling-calc](https://github.com/kotaooka/sampling-calc) |
-| データ解析（統計） | 2値データの要因解析 | https://kotaooka.github.io/logit-calc/ | [logit-calc](https://github.com/kotaooka/logit-calc) |
+| データ解析（統計） | ロジスティック回帰 | https://kotaooka.github.io/logit-calc/ | [logit-calc](https://github.com/kotaooka/logit-calc) |
 | データ解析（統計） | 実験計画法 | https://kotaooka.github.io/doe-calc/ | [doe-calc](https://github.com/kotaooka/doe-calc) |
 | 工学計算（寸法・機構・色） | 公差積み上げ計算 | https://kotaooka.github.io/stackup-calc/ | [stackup-calc](https://github.com/kotaooka/stackup-calc) |
 | 工学計算（寸法・機構・色） | はめあい・ねじ公差計算機 | https://kotaooka.github.io/fit-calc/ | [fit-calc](https://github.com/kotaooka/fit-calc) |
@@ -17,7 +17,7 @@
 | 工学計算（寸法・機構・色） | 普通公差計算機 | https://kotaooka.github.io/gentol-calc/ | [gentol-calc](https://github.com/kotaooka/gentol-calc) |
 | 工学計算（寸法・機構・色） | 三角形計算機 | https://kotaooka.github.io/triangle-calc/ | [triangle-calc](https://github.com/kotaooka/triangle-calc) |
 | 工学計算（寸法・機構・色） | トグルクランプ締圧力計算機 | https://kotaooka.github.io/clamp-calc/ | [clamp-calc](https://github.com/kotaooka/clamp-calc) |
-| 工学計算（寸法・機構・色） | 色差累積ビューア | https://kotaooka.github.io/deltae-calc/ | [deltae-calc](https://github.com/kotaooka/deltae-calc) |
+| 工学計算（寸法・機構・色） | 色差計算機 | https://kotaooka.github.io/deltae-calc/ | [deltae-calc](https://github.com/kotaooka/deltae-calc) |
 | 問題集 | QC2級ドリル | https://kotaooka.github.io/qc2-drill/ | [qc2-drill](https://github.com/kotaooka/qc2-drill) |
 | 問題集 | 幾何公差ドリル | https://kotaooka.github.io/gdt-drill/ | [gdt-drill](https://github.com/kotaooka/gdt-drill) |
 | ユーティリティ | PDF圧縮 | https://kotaooka.github.io/PDFComp/ | [PDFComp](https://github.com/kotaooka/PDFComp) |

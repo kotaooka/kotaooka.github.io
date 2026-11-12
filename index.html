@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>QC Workbench｜品質管理の計算ツールと問題集</title>
-<meta name="description" content="測定システム解析・工程能力・抜取検査・2値データの要因解析・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。書類の PDF 圧縮と自動車ローンの返済計算も。">
+<meta name="description" content="測定システム解析・工程能力・抜取検査・ロジスティック回帰・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。書類の PDF 圧縮と自動車ローンの返済計算も。">
 <meta name="theme-color" content="#1d5c96" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#11161b" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="QC Workbench｜品質管理の計算ツールと問題集">
-<meta property="og:description" content="測定システム解析・工程能力・抜取検査・2値データの要因解析・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。書類の PDF 圧縮と自動車ローンの返済計算も。">
+<meta property="og:description" content="測定システム解析・工程能力・抜取検査・ロジスティック回帰・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。書類の PDF 圧縮と自動車ローンの返済計算も。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kotaooka.github.io/">
 <meta property="og:site_name" content="QC Workbench">
@@ -269,7 +269,7 @@ const tools = [
   },
   {
     section: "stat", fig: "logit",
-    name: "2値データの要因解析",
+    name: "ロジスティック回帰",
     desc: "合否・発生の有無のような2値の結果と測定値の関係をロジスティック回帰で解析。効いている変数、確率の地図、目標の確率になる条件の逆算",
     std: ["ロジスティック回帰", "Firth法", "オッズ比 / AUC"],
     open: "https://kotaooka.github.io/logit-calc/",
@@ -333,7 +333,7 @@ const tools = [
   },
   {
     section: "eng", fig: "lab",
-    name: "色差累積ビューア",
+    name: "色差計算機",
     desc: "試料A → B → C … と色を引き継いだときの各段と累積の色差、ずれの向き、許容差の余裕を図示。2色の中間色も計算。5角度とフロップインデックスにも対応",
     std: ["CIE76 / CIE94 / CMC", "CIEDE2000", "FI"],
     open: "https://kotaooka.github.io/deltae-calc/",
