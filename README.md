@@ -22,6 +22,7 @@
 | 問題集 | 幾何公差ドリル | https://kotaooka.github.io/gdt-drill/ | [gdt-drill](https://github.com/kotaooka/gdt-drill) |
 | ユーティリティ | PDF圧縮 | https://kotaooka.github.io/PDFComp/ | [PDFComp](https://github.com/kotaooka/PDFComp) |
 | ユーティリティ | 自動車ローン計算機 | https://kotaooka.github.io/car-loan-calc/ | [car-loan-calc](https://github.com/kotaooka/car-loan-calc) |
+| ユーティリティ | yt-dlpランチャー | https://github.com/kotaooka/yt-dlp-launcher/releases/latest | [yt-dlp-launcher](https://github.com/kotaooka/yt-dlp-launcher) |
 <!-- tools:end -->
 
 ## ファイル
