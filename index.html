@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>QC Workbench｜品質管理の計算ツールと問題集</title>
-<meta name="description" content="測定システム解析・工程能力・抜取検査・ロジスティック回帰・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。書類の PDF 圧縮と自動車ローンの返済計算も。">
+<meta name="description" content="測定システム解析・工程能力・抜取検査・ロジスティック回帰・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。書類の PDF 圧縮、自動車ローンの返済計算、Amazon の注文履歴の集計も。">
 <meta name="theme-color" content="#1d5c96" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#11161b" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="QC Workbench｜品質管理の計算ツールと問題集">
-<meta property="og:description" content="測定システム解析・工程能力・抜取検査・ロジスティック回帰・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。書類の PDF 圧縮と自動車ローンの返済計算も。">
+<meta property="og:description" content="測定システム解析・工程能力・抜取検査・ロジスティック回帰・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。書類の PDF 圧縮、自動車ローンの返済計算、Amazon の注文履歴の集計も。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kotaooka.github.io/">
 <meta property="og:site_name" content="QC Workbench">
@@ -374,6 +374,14 @@ const tools = [
     repo: "https://github.com/kotaooka/car-loan-calc"
   },
   {
+    section: "util", fig: "order",
+    name: "Amazon注文履歴アナライザー",
+    desc: "Amazonの注文履歴のZIPを読み込み、年別・月別の購入額、カテゴリ、リピート購入、高額の買い物、注文する時間帯を集計。プライム会費の月額と年間の差、Kindleの貸出にも対応",
+    std: ["Your Orders.zip", "年別 / カテゴリ", "リピート購入"],
+    open: "https://kotaooka.github.io/amazon-order-analyzer/",
+    repo: "https://github.com/kotaooka/amazon-order-analyzer"
+  },
+  {
     section: "util", fig: "dl",
     name: "yt-dlpランチャー",
     desc: "Windowsでダブルクリックして使うyt-dlpのランチャー。URLをコピーしてEnterを押すだけで動画・音声をダウンロード。最高画質・mp4・mp3の切り替え、cookie、動画ファイルの直リンクにも対応",
@@ -517,6 +525,16 @@ const figs = {
       ${arrow(y - 3, 1)}${arrow(y + h + 3, -1)}`;
   },
   // yt-dlpランチャー：プロンプトの出たコンソール窓と、トレイに落ちる下向きの矢印
+  order() {
+    // 段ボール箱と、伸びる棒グラフ
+    const base = 74;
+    let bars = "";
+    [18, 30, 46].forEach((h, i) => { bars += `<rect x="${78 + i * 14}" y="${base - h}" width="10" height="${h}" fill="var(--fig-weak)" stroke="currentColor" stroke-width="1.2"/>`; });
+    return `<path d="M10 ${base}H124" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M18 40L24 30H66L60 40Z" fill="var(--fig-weak)" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <rect x="18" y="40" width="42" height="${base - 40}" fill="var(--fig-weak)" stroke="currentColor" stroke-width="1.5"/>
+      <rect x="35" y="40" width="8" height="14" fill="currentColor"/>${bars}`;
+  },
   dl() {
     const x = 12, y = 14, w = 70, h = 52;
     return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="var(--panel)" stroke="currentColor" stroke-width="1.5"/>
