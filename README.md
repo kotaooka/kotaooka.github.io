@@ -1,6 +1,6 @@
 # QC Workbench
 
-品質管理の計算ツールと問題集（と書類の PDF 圧縮）の入口ページ。公開先は https://kotaooka.github.io/ 。
+品質管理の計算ツールと問題集の入口ページ。公開先は https://kotaooka.github.io/ 。
 
 <!-- このツール表は tools/make_readme.py が index.html から作る。手で直さない -->
 <!-- tools:start -->
@@ -20,9 +20,6 @@
 | 工学計算（寸法・機構・色） | 色差計算機 | https://kotaooka.github.io/deltae-calc/ | [deltae-calc](https://github.com/kotaooka/deltae-calc) |
 | 問題集 | QC2級ドリル | https://kotaooka.github.io/qc2-drill/ | [qc2-drill](https://github.com/kotaooka/qc2-drill) |
 | 問題集 | 幾何公差ドリル | https://kotaooka.github.io/gdt-drill/ | [gdt-drill](https://github.com/kotaooka/gdt-drill) |
-| ユーティリティ | PDF圧縮 | https://kotaooka.github.io/PDFComp/ | [PDFComp](https://github.com/kotaooka/PDFComp) |
-| ユーティリティ | 自動車ローン計算機 | https://kotaooka.github.io/car-loan-calc/ | [car-loan-calc](https://github.com/kotaooka/car-loan-calc) |
-| ユーティリティ | yt-dlpランチャー | https://github.com/kotaooka/yt-dlp-launcher/releases/latest | [yt-dlp-launcher](https://github.com/kotaooka/yt-dlp-launcher) |
 <!-- tools:end -->
 
 ## ファイル
@@ -48,7 +45,7 @@ LICENSE                        MIT ライセンス
 3. **ツール側の OGP**：`<head>` に description、canonical、`og:*`（`og:site_name` は `QC Workbench`）、`twitter:card` を入れ、1200×630 の `og.png` をツールの公開フォルダに置く。`og:image` は絶対 URL で書く。
 4. **ツール側の戻るリンク**：画面上部の見出しの前に `https://kotaooka.github.io/` へのリンク（表示は「QC Workbench ›」）を置く。
 
-ツール側のリポジトリには `LICENSE` を置く（MIT。GPL 系のライブラリを組み込むときはそのライセンスに合わせる。例：PDFComp は Ghostscript を使うため AGPL-3.0）。
+ツール側のリポジトリには `LICENSE` を置く（MIT。GPL 系のライブラリを組み込むときはそのライセンスに合わせる。例：AGPL のライブラリを使うなら AGPL-3.0）。
 
 README のツール表は、`main` に push すると GitHub Actions（`.github/workflows/readme.yml`）が `python tools/make_readme.py` を実行し、変わっていればコミットする。手元で先に作り直してもよい（`python tools/make_readme.py`、確認だけなら `--check`）。表の並びは `groups` の順、区分の中は `tools` 配列の順。
 

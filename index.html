@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>QC Workbench｜品質管理の計算ツールと問題集</title>
-<meta name="description" content="測定システム解析・工程能力・抜取検査・ロジスティック回帰・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。書類の PDF 圧縮と自動車ローンの返済計算も。">
+<meta name="description" content="測定システム解析・工程能力・抜取検査・ロジスティック回帰・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。">
 <meta name="theme-color" content="#1d5c96" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#11161b" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="QC Workbench｜品質管理の計算ツールと問題集">
-<meta property="og:description" content="測定システム解析・工程能力・抜取検査・ロジスティック回帰・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。書類の PDF 圧縮と自動車ローンの返済計算も。">
+<meta property="og:description" content="測定システム解析・工程能力・抜取検査・ロジスティック回帰・実験計画法のデータ解析と、公差積み上げ・はめあい・ねじ・普通公差・三角形・トグルクランプ・色差の工学計算、QC検定2級・幾何公差の問題集。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kotaooka.github.io/">
 <meta property="og:site_name" content="QC Workbench">
@@ -238,8 +238,7 @@
 const groups = {
   stat:  { title: "データ解析（統計）" },
   eng:   { title: "工学計算（寸法・機構・色）" },
-  drill: { title: "問題集",     note: "計算問題は毎回数値が変わります。間隔反復による復習つき" },
-  util:  { title: "ユーティリティ" }
+  drill: { title: "問題集",     note: "計算問題は毎回数値が変わります。間隔反復による復習つき" }
 };
 
 const tools = [
@@ -356,30 +355,6 @@ const tools = [
     open: "https://kotaooka.github.io/gdt-drill/",
     repo: "https://github.com/kotaooka/gdt-drill",
     android: "https://github.com/kotaooka/gdt-drill/releases/latest"
-  },
-  {
-    section: "util", fig: "pdf",
-    name: "PDF圧縮",
-    desc: "PDFのファイルサイズを小さくする。強さを選ぶか、1ファイルの上限を決めて画質を自動で選ぶ。圧縮前後のページを並べて画質を確認",
-    std: ["Ghostscript", "上限サイズ指定", "一括 / ZIP"],
-    open: "https://kotaooka.github.io/PDFComp/",
-    repo: "https://github.com/kotaooka/PDFComp"
-  },
-  {
-    section: "util", fig: "loan",
-    name: "自動車ローン計算機",
-    desc: "月々の支払額と利息の合計、払える月額から借りられる額を計算。残価設定・ボーナス併用、繰上げ返済、変動金利の上昇を比較。銀行・ディーラーの金利の例にも対応",
-    std: ["元利均等 / 元金均等", "残価設定", "繰上げ返済"],
-    open: "https://kotaooka.github.io/car-loan-calc/",
-    repo: "https://github.com/kotaooka/car-loan-calc"
-  },
-  {
-    section: "util", fig: "dl",
-    name: "yt-dlpランチャー",
-    desc: "Windowsでダブルクリックして使うyt-dlpのランチャー。URLをコピーしてEnterを押すだけで動画・音声をダウンロード。最高画質・mp4・mp3の切り替え、cookie、動画ファイルの直リンクにも対応",
-    std: ["yt-dlp", "FFmpeg / Deno", "Windows .bat"],
-    open: "https://github.com/kotaooka/yt-dlp-launcher/releases/latest",
-    repo: "https://github.com/kotaooka/yt-dlp-launcher"
   }
 ];
 
@@ -489,44 +464,6 @@ const figs = {
       <line x1="8" y1="74" x2="124" y2="74" stroke="currentColor" stroke-dasharray="4 3" stroke-opacity=".7"/>
       <path d="${path(pts)}" fill="none" stroke="currentColor" stroke-width="1.5"/>
       ${pts.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="2.6" fill="var(--panel)" stroke="currentColor" stroke-width="1.5"/>`).join("")}`;
-  },
-  // PDF圧縮：上下から押し縮められる書類
-  // 自動車ローン：回ごとに減る残高の棒と、最後に据え置く残価の棒
-  loan() {
-    const base = 74, x0 = 22, bw = 9, gap = 3, n = 7;
-    let bars = "";
-    for (let i = 0; i < n; i++) {
-      const h = 50 * (1 - i / n * 0.55);
-      bars += `<rect x="${x0 + i * (bw + gap)}" y="${(base - h).toFixed(1)}" width="${bw}" height="${h.toFixed(1)}" fill="var(--fig-weak)" stroke="currentColor" stroke-width="1.2"/>`;
-    }
-    const xl = x0 + n * (bw + gap) + 4, hl = 26;
-    return `<path d="M14 ${base}H118" stroke="currentColor" stroke-width="1.5"/>${bars}
-      <rect x="${xl}" y="${base - hl}" width="${bw + 4}" height="${hl}" fill="currentColor"/>`;
-  },
-  pdf() {
-    const x = 44, y = 26, w = 44, h = 36, f = 10;
-    const arrow = (tip, dir) => {
-      const b = tip - dir * 9;
-      return `<path d="M66 ${tip}L59 ${b}H73Z" fill="currentColor"/><path d="M66 ${b}V${b - dir * 8}" stroke="currentColor" stroke-width="3"/>`;
-    };
-    return `<path d="M${x} ${y}H${x + w - f}L${x + w} ${y + f}V${y + h}H${x}Z" fill="var(--panel)" stroke="currentColor" stroke-width="1.5"/>
-      <path d="M${x + w - f} ${y}V${y + f}H${x + w}" fill="none" stroke="currentColor" stroke-width="1.5"/>
-      <rect x="${x - 6}" y="${y + 18}" width="34" height="13" rx="2" fill="var(--fig-weak)" stroke="currentColor" stroke-width="1.2"/>
-      <text x="${x + 11}" y="${y + 28}" text-anchor="middle" font-size="10" font-weight="700" font-family="var(--f-num)" fill="currentColor">PDF</text>
-      <path d="M${x + 7} ${y + 8}H${x + 24}M${x + 7} ${y + 13}H${x + 30}" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/>
-      ${arrow(y - 3, 1)}${arrow(y + h + 3, -1)}`;
-  },
-  // yt-dlpランチャー：プロンプトの出たコンソール窓と、トレイに落ちる下向きの矢印
-  dl() {
-    const x = 12, y = 14, w = 70, h = 52;
-    return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="var(--panel)" stroke="currentColor" stroke-width="1.5"/>
-      <path d="M${x} ${y + 3}a3 3 0 0 1 3 -3H${x + w - 3}a3 3 0 0 1 3 3V${y + 10}H${x}Z" fill="var(--fig-weak)" stroke="currentColor" stroke-width="1.5"/>
-      <path d="M${x + 9} ${y + 20}l7 6-7 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M${x + 22} ${y + 33}H${x + 32}" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      <path d="M${x + 9} ${y + 43}H${x + 52}" stroke="currentColor" stroke-opacity=".4" stroke-width="1.5"/>
-      <path d="M104 14V48" stroke="currentColor" stroke-width="3"/><path d="M104 58L95 46H113Z" fill="currentColor"/>
-      <path d="M90 62V74H118V62" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-      <rect x="92" y="67" width="24" height="5" fill="var(--fig-weak)"/>`;
   },
   // トグルクランプ：台座・押えアーム・ハンドル・リンクと、ワークを押す矢印
   clamp() {
