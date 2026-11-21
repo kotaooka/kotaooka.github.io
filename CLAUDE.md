@@ -13,6 +13,9 @@
 ## 消してはいけないファイル
 - `googlede6a9549483e5636.html` は Google Search Console の所有権確認ファイル。消すと所有権が外れる。
 
+## 自動で作るもの
+- `README.md` のツール表は、`index.html` の `tools` 配列から `tools/make_readme.py` が作る（main への push で `.github/workflows/readme.yml` が動く）。表は手で直さず、`index.html` を直す。
+
 ## 見た目と言葉づかい
 - 色・字体・文言の規則は `DESIGN.md` にある。このサイトと各ツールの色や文言を変えるときは、先に `DESIGN.md` を読んで合わせる。
 - 規則そのものを変えるときは、`DESIGN.md` を直してから全ツールに反映する。
